@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siaxen · Stylescape — Direction 02</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root{--base:#0A0E10;--surf:#111619;--acc:#5BB8AE;--tx:#F5F0EB}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--base);color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acc);color:var(--base)}
+.pad{padding-left:clamp(16px,4vw,56px);padding-right:clamp(16px,4vw,56px)}
+
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);z-index:100;width:0;transition:width .05s}
+
+.bg-dots{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,var(--acc) 1px,transparent 1px);background-size:32px 32px;opacity:.06}
+.bg-vig{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 30%,var(--base) 80%)}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px 128px}
+body>:not(.bg-dots):not(.bg-vig):not(.bg-noise):not(.progress){position:relative;z-index:1}
+
+.dv{height:1px;background:linear-gradient(90deg,transparent,var(--acc),transparent);opacity:.08}
+
+.sh{padding-top:clamp(56px,8vw,96px);padding-bottom:clamp(20px,3vw,32px)}
+.sh-num{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--acc)}
+.sh-title{font-size:clamp(24px,3.5vw,36px);font-weight:700;letter-spacing:-.5px;color:var(--tx);opacity:.8;margin-top:4px}
+.sh-desc{font-size:clamp(10px,1.1vw,12px);font-weight:400;color:var(--tx);opacity:.18;line-height:1.8;margin-top:8px;max-width:520px}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:clamp(24px,4vw,56px)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-inner{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+@keyframes hF{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-label{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--acc);margin-bottom:clamp(20px,3vw,36px);opacity:0;animation:hF .8s ease .2s forwards}
+.hero-title{font-size:clamp(44px,7vw,88px);font-weight:700;letter-spacing:clamp(-2px,-.7vw,-1.5px);line-height:.9}
+.hero-w{color:var(--tx);display:block;opacity:0;animation:hF .8s ease .3s forwards}
+.hero-c{color:var(--acc);display:block;opacity:0;animation:hF .8s ease .45s forwards}
+.hero-desc{margin-top:clamp(16px,3vw,28px);font-size:clamp(11px,1.2vw,13px);font-weight:400;color:var(--tx);opacity:0;line-height:1.9;max-width:440px;animation:hF .8s ease .6s forwards}
+.hero-desc-v{opacity:.3!important}
+.hero-bar{width:48px;height:2px;background:var(--acc);margin-top:clamp(14px,2vw,20px);opacity:0;animation:hF .8s ease .7s forwards}
+.hero-bar-v{opacity:.5!important}
+
+.hero-pal-wrap{opacity:0;animation:hF .8s ease .5s forwards}
+.hero-pal{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.hp{height:clamp(100px,14vw,140px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(12px,1.5vw,18px);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s;border-radius:4px}
+.hp:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.hp1{background:var(--base);border:1px solid rgba(91,184,174,.06)}
+.hp2{background:var(--surf)}.hp3{background:var(--acc)}.hp4{background:var(--tx)}
+.hp-role{font-size:7px;font-weight:700;letter-spacing:3px;margin-bottom:2px}
+.hp-name{font-size:13px;font-weight:700;letter-spacing:-.2px;margin-bottom:1px}
+.hp-hex{font-size:10px;font-weight:500;letter-spacing:1px}
+.hp1 .hp-role,.hp2 .hp-role{color:var(--tx);opacity:.3}
+.hp1 .hp-name,.hp2 .hp-name{color:var(--tx);opacity:.65}
+.hp1 .hp-hex,.hp2 .hp-hex{color:var(--tx);opacity:.35}
+.hp3 .hp-role{color:var(--base);opacity:.4}.hp3 .hp-name{color:var(--base);opacity:.75}.hp3 .hp-hex{color:var(--base);opacity:.45}
+.hp4 .hp-role{color:var(--base);opacity:.25}.hp4 .hp-name{color:var(--base);opacity:.5}.hp4 .hp-hex{color:var(--base);opacity:.3}
+.hero-pal-label{font-size:7px;font-weight:700;letter-spacing:4px;color:var(--tx);opacity:.08;text-align:center;margin-top:8px}
+
+/* STRATEGY */
+.strategy{padding:clamp(32px,4vw,48px) clamp(16px,4vw,56px)}
+.strategy-label{font-size:9px;font-weight:700;letter-spacing:4px;color:var(--acc);opacity:.5;margin-bottom:clamp(16px,2.5vw,28px)}
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.strat-card{background:var(--surf);padding:clamp(24px,3.5vw,36px);transition:background .4s;border-top:2px solid rgba(91,184,174,.12);border-radius:5px}
+.strat-card:hover{background:rgba(17,22,25,.9);border-top-color:rgba(91,184,174,.3)}
+.strat-num{font-size:8px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.3;margin-bottom:12px}
+.strat-title{font-size:14px;font-weight:700;letter-spacing:-.3px;color:var(--tx);opacity:.7;margin-bottom:8px}
+.strat-desc{font-size:10px;font-weight:400;color:var(--tx);opacity:.18;line-height:1.8}
+
+/* VISUAL COMPOSITIONS */
+.vis{padding-bottom:clamp(40px,5vw,64px)}
+.vis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.vc{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--surf);transition:transform .5s cubic-bezier(.16,1,.3,1);border-radius:4px}
+.vc:hover{transform:scale(1.008);z-index:3}
+.vc canvas{position:absolute;inset:0;width:100%;height:100%;filter:brightness(1.15)}
+.vc-lbl{position:absolute;bottom:clamp(10px,1.5vw,14px);left:clamp(10px,1.5vw,14px);font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.3;z-index:5}
+
+/* TYPOGRAPHY */
+.typo{padding-bottom:clamp(40px,5vw,64px)}
+.typo-strip{display:grid;grid-template-columns:1.3fr 1fr;gap:4px}
+.typo-main{background:var(--surf);padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;border-radius:5px}
+.typo-tag{font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.4;margin-bottom:16px;position:relative;z-index:2}
+.typo-h{font-size:clamp(36px,5vw,60px);font-weight:700;letter-spacing:clamp(-1.5px,-.4vw,-1px);line-height:1.1;position:relative;z-index:2}
+.typo-h em{font-style:normal;color:var(--acc)}
+.typo-samples{margin-top:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+.typo-sample{display:flex;align-items:baseline;gap:14px}
+.typo-sample-label{font-size:7px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.25;width:56px;flex-shrink:0}
+.typo-side{background:var(--surf);padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;justify-content:center;border-radius:5px}
+.typo-side-tag{font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.4;margin-bottom:16px}
+.ui-btns{display:flex;flex-direction:column;gap:14px}
+.btn-p{display:inline-flex;padding:14px 32px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--acc);color:var(--base);border:none;font-family:inherit;width:fit-content;cursor:pointer;transition:all .3s;border-radius:4px}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,184,174,.15)}
+.btn-o{display:inline-flex;padding:14px 32px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--acc);border:1.5px solid var(--acc);background:transparent;font-family:inherit;width:fit-content;opacity:.4;cursor:pointer;transition:all .3s;border-radius:4px}
+.btn-o:hover{opacity:.65;transform:translateY(-2px)}
+.btn-t{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:500;color:var(--acc);opacity:.3;border:none;background:none;font-family:inherit;width:fit-content;cursor:pointer}
+.btn-t-line{width:16px;height:1.5px;background:var(--acc)}
+
+/* ICONS */
+.icons{padding-bottom:clamp(40px,5vw,64px)}
+.icons-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.icon-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:clamp(24px,3.5vw,44px) 12px;background:var(--surf);border:1px solid var(--base);transition:all .4s cubic-bezier(.16,1,.3,1);border-radius:3px}
+.icon-cell:hover{background:var(--base);border-color:rgba(91,184,174,.06);transform:translateY(-3px)}
+.icon-svg{width:48px;height:48px;flex-shrink:0;transition:transform .4s}
+.icon-cell:hover .icon-svg{transform:scale(1.08)}
+.icon-svg svg{width:100%;height:100%}
+.icon-name{font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.25;text-align:center;transition:all .4s}
+.icon-cell:hover .icon-name{opacity:.4}
+
+/* DATA — PREMIUM */
+.data{padding-bottom:clamp(40px,5vw,64px)}
+.data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.data-panel{background:var(--surf);padding:clamp(30px,4.5vw,52px) clamp(24px,3.5vw,44px);position:relative;overflow:hidden;transition:background .4s,transform .4s cubic-bezier(.16,1,.3,1);border-radius:5px}
+.data-panel:hover{background:rgba(17,22,25,.95);transform:translateY(-2px)}
+.data-panel::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(91,184,174,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(91,184,174,.018) 1px,transparent 1px);background-size:32px 32px}
+.data-panel::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(91,184,174,.15),transparent);pointer-events:none}
+.dp-amb{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.dp-amb-1{width:200px;height:200px;top:-60px;right:-40px;background:radial-gradient(circle,rgba(91,184,174,.03) 0%,transparent 70%)}
+.dp-amb-2{width:240px;height:240px;bottom:-80px;left:-50px;background:radial-gradient(circle,rgba(91,184,174,.02) 0%,transparent 70%)}
+.dp-corner{position:absolute;pointer-events:none;z-index:3}
+.dp-corner svg{width:12px;height:12px}
+.dp-corner-tl{top:10px;left:10px}
+.dp-corner-br{bottom:10px;right:10px;transform:rotate(180deg)}
+.dp-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(20px,3vw,32px);position:relative;z-index:2}
+.dp-idx{font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.2}
+.dp-title{font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.55;margin-top:3px}
+.dp-kpi{text-align:right}
+.dp-kpi-val{font-size:clamp(24px,3.2vw,36px);font-weight:700;letter-spacing:-1.5px;color:var(--acc);opacity:.4;line-height:1}
+.dp-kpi-lbl{font-size:6px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.15;margin-top:3px}
+.dp-chart{position:relative;z-index:2;height:clamp(150px,18vw,220px)}
+.dp-chart svg{width:100%;height:100%;overflow:visible}
+.dp-base{height:1px;background:var(--acc);opacity:.08;position:relative;z-index:2;margin-top:2px}
+.dp-labels{display:flex;justify-content:space-between;margin-top:10px;position:relative;z-index:2}
+.dp-labels span{font-size:6px;font-weight:600;letter-spacing:1px;color:var(--acc);opacity:.15}
+.dp-donut-layout{display:flex;align-items:center;gap:clamp(20px,3vw,36px);height:100%;position:relative;z-index:2}
+.dp-ring{position:relative;flex-shrink:0;width:clamp(120px,15vw,170px);height:clamp(120px,15vw,170px)}
+.dp-ring svg{width:100%;height:100%}
+.dp-ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.dp-ring-num{font-size:clamp(26px,3.5vw,36px);font-weight:700;letter-spacing:-2px;color:var(--acc);opacity:.5;line-height:1}
+.dp-ring-lbl{font-size:6px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.18;margin-top:3px;display:block}
+.dp-legend{display:flex;flex-direction:column;gap:14px}
+.dp-leg{display:flex;align-items:center;gap:10px}
+.dp-leg-bar{width:20px;height:2px;border-radius:1px;flex-shrink:0;background:var(--acc)}
+.dp-leg-txt{font-size:8px;font-weight:500;color:var(--tx);opacity:.2}
+.dp-leg-val{font-size:11px;font-weight:700;letter-spacing:-.3px;color:var(--acc);opacity:.3;margin-left:auto;padding-left:12px}
+
+/* FOOTER */
+.foot{padding:clamp(44px,6vw,72px) clamp(16px,4vw,56px);border-top:1px solid rgba(91,184,174,.06);display:flex;flex-direction:column;align-items:center;gap:16px}
+.foot-credit{font-size:8px;font-weight:500;letter-spacing:2px;color:var(--tx);opacity:.08}
+.foot-logo img{height:20px;opacity:.15;filter:grayscale(1) brightness(2)}
+.foot-logo-text{font-size:14px;font-weight:700;letter-spacing:3px;color:var(--tx);opacity:.12;display:none}
+
+@media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr}.hero-pal-wrap{margin-top:32px}
+    .strategy-grid{grid-template-columns:1fr}
+    .typo-strip{grid-template-columns:1fr}
+    .vis-grid{grid-template-columns:repeat(2,1fr)}
+    .icons-grid{grid-template-columns:repeat(3,1fr)}
+    .data-grid{grid-template-columns:1fr}
+    .dp-donut-layout{flex-direction:column;align-items:center;text-align:center}
+    .dp-legend{width:100%;max-width:280px}
+    .dp-ring{width:clamp(140px,40vw,180px);height:clamp(140px,40vw,180px)}
+}
+@media(max-width:600px){
+    .vis-grid{grid-template-columns:repeat(2,1fr)}
+    .icons-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-title{font-size:clamp(36px,12vw,56px)}
+    .typo-h{font-size:clamp(28px,8vw,44px)}
+    .sh-desc{max-width:100%}
+    .strat-desc{font-size:9px}
+    .dp-donut-layout{gap:20px}
+    .dp-head{flex-wrap:wrap;gap:8px}
+    .dp-ring{width:130px;height:130px}
+    .dp-leg-txt{font-size:7px}
+    .dp-leg-val{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<div class="bg-dots"></div>
+<div class="bg-vig"></div>
+<div class="bg-noise"></div>
+
+<!-- HERO -->
+<section class="hero">
+    <canvas id="heroBg"></canvas>
+    <div class="hero-inner">
+        <div>
+            <div style="font-size:14px;font-weight:700;letter-spacing:6px;color:var(--tx);margin-bottom:clamp(12px,2vw,20px);opacity:0;animation:hF .8s ease .1s forwards">SIAXEN</div>
+            <div class="hero-label">STYLESCAPE · DIRECTION 02</div>
+            <div class="hero-title"><span class="hero-w">Flowing</span><span class="hero-c">Depth</span></div>
+            <div class="hero-desc hero-desc-v">Inspired by converging paths and calculated precision. The visual identity uses parametric curves that move from disorder to alignment, expressing the brand's core promise through engineered motion. Teal carries calm intellectual weight, far from medical blue. Analytical without being clinical. It reflects a brand that does not chase attention. It is the center that everything converges toward.</div>
+            <div class="hero-bar hero-bar-v"></div>
+        </div>
+        <div class="hero-pal-wrap">
+            <div class="hero-pal">
+                <div class="hp hp1"><div class="hp-role">BASE</div><div class="hp-name">Deep Ocean</div><div class="hp-hex">#0A0E10</div></div>
+                <div class="hp hp2"><div class="hp-role">SURFACE</div><div class="hp-name">Night Slate</div><div class="hp-hex">#111619</div></div>
+                <div class="hp hp3"><div class="hp-role">ACCENT</div><div class="hp-name">Teal</div><div class="hp-hex">#5BB8AE</div></div>
+                <div class="hp hp4"><div class="hp-role">TEXT</div><div class="hp-name">Ivory</div><div class="hp-hex">#F5F0EB</div></div>
+            </div>
+            <div class="hero-pal-label">COLOUR PALETTE</div>
+        </div>
+    </div>
+</section>
+
+<!-- STRATEGY -->
+<div class="strategy">
+    <div class="strategy-label">WHY THIS DIRECTION</div>
+    <div class="strategy-grid">
+        <div class="strat-card reveal"><div class="strat-num">01</div><div class="strat-title">Teal, not blue</div><div class="strat-desc">Medical blue is the most overused color in healthcare. Teal sits in a different space entirely: deeper, calmer, more intellectual. It signals analytical thinking without the clinical coldness that every MedTech competitor defaults to.</div></div>
+        <div class="strat-card reveal rd1"><div class="strat-num">02</div><div class="strat-title">Convergence, not construction</div><div class="strat-desc">Direction 01 expresses &#8220;replacing fragmentation with architecture&#8221; through straight lines becoming grids. This direction expresses the same promise through scattered paths being engineered into one convergent system. Different visual language, identical meaning.</div></div>
+        <div class="strat-card reveal rd2"><div class="strat-num">03</div><div class="strat-title">Parametric, not decorative</div><div class="strat-desc">Every curve follows a calculated path. This serves the Sage archetype (30% of the brand personality): intellectual depth, calculated precision, and quiet confidence in the face of complexity.</div></div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- VISUAL LANGUAGE -->
+<div class="sh pad reveal"><div class="sh-num">01 · VISUAL DIRECTION</div><div class="sh-title">Visual Language</div><div class="sh-desc">These compositions express &#8220;disorder becoming alignment&#8221; through parametric curves. Each one translates the brand's core concept using calculated motion, giving the identity a consistent visual vocabulary.</div></div>
+<div class="vis pad">
+    <div class="vis-grid">
+        <div class="vc reveal"><canvas id="v1"></canvas><div class="vc-lbl">SCATTER → ORDER</div></div>
+        <div class="vc reveal rd1"><canvas id="v2"></canvas><div class="vc-lbl">PARAMETRIC FIELD</div></div>
+        <div class="vc reveal rd2"><canvas id="v3"></canvas><div class="vc-lbl">CONTOUR DEPTH</div></div>
+        <div class="vc reveal"><canvas id="v4"></canvas><div class="vc-lbl">GRAVITY WELL</div></div>
+        <div class="vc reveal rd1"><canvas id="v5"></canvas><div class="vc-lbl">MAGNETIC FIELD</div></div>
+        <div class="vc reveal rd2"><canvas id="v6"></canvas><div class="vc-lbl">TOPOLOGY</div></div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- TYPOGRAPHY + UI -->
+<div class="sh pad reveal"><div class="sh-num">02 · TYPE SYSTEM</div><div class="sh-title">Outfit Font</div><div class="sh-desc">A geometric sans-serif with a full weight range from thin to black. Clean uniform letterforms with sharp terminals. Chosen because it carries the same geometric discipline as the brand's visual system but with slightly wider proportions that give headlines more presence on screen.</div></div>
+<div class="typo pad">
+    <div class="typo-strip reveal">
+        <div class="typo-main">
+            <div class="typo-tag">OUTFIT · DISPLAY</div>
+            <div class="typo-h">Your discovery.<br><em>Synchronized.</em><br>Investable.</div>
+            <div class="typo-samples">
+                <div class="typo-sample"><div class="typo-sample-label">DISPLAY</div><div style="font-size:18px;font-weight:700;letter-spacing:-1px;color:var(--tx);opacity:.3">Bold 700</div></div>
+                <div class="typo-sample"><div class="typo-sample-label">BODY</div><div style="font-size:13px;font-weight:300;color:var(--tx);opacity:.2">Light 300</div></div>
+                <div class="typo-sample"><div class="typo-sample-label">LABEL</div><div style="font-size:9px;font-weight:700;letter-spacing:4px;color:var(--acc);opacity:.35">BOLD 700</div></div>
+            </div>
+        </div>
+        <div class="typo-side">
+            <div class="typo-side-tag">INTERFACE ELEMENTS</div>
+            <div class="ui-btns">
+                <button class="btn-p">Explore TRIAGE™ →</button>
+                <button class="btn-o">Learn more →</button>
+                <button class="btn-t">How it works <span class="btn-t-line"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ICONOGRAPHY -->
+<div class="sh pad reveal"><div class="sh-num">03 · ICONOGRAPHY</div><div class="sh-title">Icon System</div><div class="sh-desc">All icons share the same visual rules: calculated curves, circular forms, clean outlines, no filled shapes. Each one represents a core brand concept using the same parametric language as the rest of the identity.</div></div>
+<div class="icons pad">
+    <div class="icons-grid reveal">
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><path d="M4,24 Q14,10 24,24 Q34,38 44,24" stroke="#5BB8AE" stroke-width="1.5" opacity=".35" fill="none"/><path d="M4,24 Q14,38 24,24 Q34,10 44,24" stroke="#5BB8AE" stroke-width="1.5" opacity=".18" fill="none"/><circle cx="24" cy="24" r="3.5" stroke="#5BB8AE" stroke-width="1.5" opacity=".45"/><circle cx="24" cy="24" r="1.5" fill="#5BB8AE" opacity=".35"/></svg></div><div class="icon-name">NEXUS</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><path d="M6,40 C12,12 36,12 42,40" stroke="#5BB8AE" stroke-width="1.5" opacity=".3" fill="none"/><path d="M12,40 C16,20 32,20 36,40" stroke="#5BB8AE" stroke-width="1.5" opacity=".2" fill="none"/><path d="M18,40 C20,28 28,28 30,40" stroke="#5BB8AE" stroke-width="1.5" opacity=".12" fill="none"/><circle cx="24" cy="10" r="2.5" stroke="#5BB8AE" stroke-width="1.5" opacity=".45"/><line x1="24" y1="13" x2="24" y2="26" stroke="#5BB8AE" stroke-width="1" opacity=".1" stroke-dasharray="2,2"/></svg></div><div class="icon-name">APEX</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="6" y1="42" x2="42" y2="42" stroke="#5BB8AE" stroke-width="1.5" opacity=".12"/><path d="M10,42 L10,30 Q10,26 14,26 L18,26 Q22,26 22,22 L22,14" stroke="#5BB8AE" stroke-width="1.5" opacity=".25" fill="none"/><path d="M24,42 L24,26 Q24,22 28,22 L32,22 Q36,22 36,18 L36,8" stroke="#5BB8AE" stroke-width="1.5" opacity=".45" fill="none"/><circle cx="22" cy="14" r="2" fill="#5BB8AE" opacity=".25"/><circle cx="36" cy="8" r="2.5" fill="#5BB8AE" opacity=".45"/></svg></div><div class="icon-name">ASCENT</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="12" r="5" stroke="#5BB8AE" stroke-width="1.5" opacity=".25"/><circle cx="12" cy="36" r="5" stroke="#5BB8AE" stroke-width="1.5" opacity=".25"/><circle cx="36" cy="36" r="5" stroke="#5BB8AE" stroke-width="1.5" opacity=".25"/><path d="M24,17 Q24,26 12,31" stroke="#5BB8AE" stroke-width="1" opacity=".15" fill="none"/><path d="M24,17 Q24,26 36,31" stroke="#5BB8AE" stroke-width="1" opacity=".15" fill="none"/><path d="M17,36 Q24,36 31,36" stroke="#5BB8AE" stroke-width="1" opacity=".12" fill="none"/></svg></div><div class="icon-name">TRIAD</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><path d="M4,30 Q12,18 24,24 Q36,30 44,18" stroke="#5BB8AE" stroke-width="1.5" opacity=".35" fill="none"/><path d="M4,36 Q12,24 24,30 Q36,36 44,24" stroke="#5BB8AE" stroke-width="1.2" opacity=".2" fill="none"/><path d="M4,24 Q12,12 24,18 Q36,24 44,12" stroke="#5BB8AE" stroke-width="1" opacity=".12" fill="none"/></svg></div><div class="icon-name">CURRENT</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="24" rx="20" ry="9" stroke="#5BB8AE" stroke-width="1" opacity=".1" transform="rotate(-30 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="9" stroke="#5BB8AE" stroke-width="1" opacity=".1" transform="rotate(30 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="9" stroke="#5BB8AE" stroke-width="1" opacity=".1" transform="rotate(90 24 24)"/><circle cx="24" cy="24" r="3.5" fill="#5BB8AE" opacity=".35"/><circle cx="24" cy="24" r="7" stroke="#5BB8AE" stroke-width=".75" opacity=".08"/></svg></div><div class="icon-name">ORBIT</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="10" y1="38" x2="38" y2="10" stroke="#5BB8AE" stroke-width="1.5" opacity=".25"/><circle cx="10" cy="38" r="3.5" stroke="#5BB8AE" stroke-width="1.5" opacity=".2"/><circle cx="38" cy="10" r="3.5" stroke="#5BB8AE" stroke-width="1.5" opacity=".4"/><circle cx="24" cy="24" r="2" fill="#5BB8AE" opacity=".3"/></svg></div><div class="icon-name">VECTOR</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><path d="M4,36 C12,36 16,16 24,16 C32,16 36,36 44,36" stroke="#5BB8AE" stroke-width="1.5" opacity=".3" fill="none"/><path d="M4,36 C12,36 16,32 24,32 C32,32 36,36 44,36" stroke="#5BB8AE" stroke-width="1" opacity=".1" fill="none"/><circle cx="24" cy="16" r="2.5" fill="#5BB8AE" opacity=".4"/><line x1="24" y1="16" x2="24" y2="32" stroke="#5BB8AE" stroke-width=".75" opacity=".08" stroke-dasharray="2,2"/></svg></div><div class="icon-name">TENSION</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#5BB8AE" stroke-width="1" opacity=".08" stroke-dasharray="4,3"/><circle cx="24" cy="24" r="11" stroke="#5BB8AE" stroke-width="1.5" opacity=".2"/><path d="M14,24 L24,14 L34,24 L24,34 Z" stroke="#5BB8AE" stroke-width="1" opacity=".15" fill="none"/><circle cx="24" cy="24" r="2.5" fill="#5BB8AE" opacity=".35"/></svg></div><div class="icon-name">COMPASS</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="2" stroke="#5BB8AE" stroke-width="1" opacity=".1"/><line x1="8" y1="24" x2="40" y2="24" stroke="#5BB8AE" stroke-width=".75" opacity=".06"/><line x1="24" y1="8" x2="24" y2="40" stroke="#5BB8AE" stroke-width=".75" opacity=".06"/><circle cx="16" cy="16" r="2.5" fill="#5BB8AE" opacity=".12"/><circle cx="32" cy="16" r="2.5" fill="#5BB8AE" opacity=".3"/><circle cx="16" cy="34" r="2.5" fill="#5BB8AE" opacity=".08"/><circle cx="32" cy="34" r="2.5" fill="#5BB8AE" opacity=".2"/></svg></div><div class="icon-name">SCATTER</div></div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- DATA — PREMIUM -->
+<div class="sh pad reveal"><div class="sh-num">04 · DATA DIRECTION</div><div class="sh-title">Data Identity</div><div class="sh-desc">Teal as the single data color with smooth curves where appropriate. The brand will present complex MedTech data to TTOs and inventors. Charts follow the same restrained system: one accent color, structural grid lines behind every chart, and precision applied to every number on screen.</div></div>
+<div class="data pad">
+    <div class="data-grid">
+        <!-- PANEL 1 — BAR CHART -->
+        <div class="data-panel reveal">
+            <div class="dp-amb dp-amb-1"></div><div class="dp-amb dp-amb-2"></div>
+            <div class="dp-corner dp-corner-tl"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#5BB8AE" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-corner dp-corner-br"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#5BB8AE" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-head">
+                <div><div class="dp-idx">01</div><div class="dp-title">PIPELINE VELOCITY</div></div>
+                <div class="dp-kpi"><div class="dp-kpi-val">88</div><div class="dp-kpi-lbl">PEAK SCORE</div></div>
+            </div>
+            <div class="dp-chart">
+                <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="barG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5BB8AE" stop-opacity=".55"/><stop offset="100%" stop-color="#5BB8AE" stop-opacity=".08"/></linearGradient>
+                        <linearGradient id="barG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5BB8AE" stop-opacity=".8"/><stop offset="100%" stop-color="#5BB8AE" stop-opacity=".15"/></linearGradient>
+                        <filter id="barGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+                    <line x1="30" y1="10" x2="395" y2="10" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="57" x2="395" y2="57" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="104" x2="395" y2="104" stroke="#5BB8AE" stroke-width=".5" opacity=".05"/>
+                    <line x1="30" y1="151" x2="395" y2="151" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                    <text x="22" y="14" fill="#5BB8AE" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">100</text>
+                    <text x="22" y="60" fill="#5BB8AE" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">75</text>
+                    <text x="22" y="108" fill="#5BB8AE" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">50</text>
+                    <text x="22" y="155" fill="#5BB8AE" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">25</text>
+                    <line x1="30" y1="8" x2="30" y2="192" stroke="#5BB8AE" stroke-width=".5" opacity=".06"/>
+                    <line x1="30" y1="192" x2="395" y2="192" stroke="#5BB8AE" stroke-width=".5" opacity=".08"/>
+                    <rect x="40" y="124" width="26" height="68" rx="3" fill="url(#barG1)" opacity=".55"/>
+                    <rect x="76" y="97" width="26" height="95" rx="3" fill="url(#barG1)" opacity=".65"/>
+                    <rect x="112" y="49" width="26" height="143" rx="3" fill="url(#barG1)" opacity=".8"/>
+                    <rect x="148" y="107" width="26" height="85" rx="3" fill="url(#barG1)" opacity=".6"/>
+                    <rect x="184" y="72" width="26" height="120" rx="3" fill="url(#barG1)" opacity=".72"/>
+                    <rect x="220" y="135" width="26" height="57" rx="3" fill="url(#barG1)" opacity=".5"/>
+                    <rect x="256" y="25" width="26" height="167" rx="3" fill="url(#barG2)" opacity=".9" filter="url(#barGlow)"/>
+                    <rect x="292" y="92" width="26" height="100" rx="3" fill="url(#barG1)" opacity=".65"/>
+                    <rect x="328" y="58" width="26" height="134" rx="3" fill="url(#barG1)" opacity=".75"/>
+                    <rect x="364" y="114" width="26" height="78" rx="3" fill="url(#barG1)" opacity=".55"/>
+                    <circle cx="269" cy="20" r="2" fill="#5BB8AE" opacity=".5"/>
+                    <line x1="269" y1="22" x2="269" y2="25" stroke="#5BB8AE" stroke-width=".75" opacity=".3"/>
+                    <text x="53" y="119" fill="#5BB8AE" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">35</text>
+                    <text x="89" y="92" fill="#5BB8AE" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">52</text>
+                    <text x="125" y="44" fill="#5BB8AE" opacity=".25" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">78</text>
+                    <text x="161" y="102" fill="#5BB8AE" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">45</text>
+                    <text x="197" y="67" fill="#5BB8AE" opacity=".22" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">65</text>
+                    <text x="233" y="130" fill="#5BB8AE" opacity=".18" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">30</text>
+                    <text x="269" y="16" fill="#5BB8AE" opacity=".45" font-size="8" text-anchor="middle" font-family="Outfit" font-weight="700">88</text>
+                    <text x="305" y="87" fill="#5BB8AE" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">55</text>
+                    <text x="341" y="53" fill="#5BB8AE" opacity=".22" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">72</text>
+                    <text x="377" y="109" fill="#5BB8AE" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">42</text>
+                </svg>
+            </div>
+            <div class="dp-base"></div>
+            <div class="dp-labels"><span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span></div>
+        </div>
+
+        <!-- PANEL 2 — LINE / AREA CHART -->
+        <div class="data-panel reveal rd1">
+            <div class="dp-amb dp-amb-1"></div><div class="dp-amb dp-amb-2"></div>
+            <div class="dp-corner dp-corner-tl"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#5BB8AE" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-corner dp-corner-br"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#5BB8AE" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-head">
+                <div><div class="dp-idx">02</div><div class="dp-title">GROWTH TRAJECTORY</div></div>
+                <div class="dp-kpi"><div class="dp-kpi-val">+147%</div><div class="dp-kpi-lbl">YOY GROWTH</div></div>
+            </div>
+            <div class="dp-chart">
+                <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5BB8AE" stop-opacity=".18"/><stop offset="60%" stop-color="#5BB8AE" stop-opacity=".04"/><stop offset="100%" stop-color="#5BB8AE" stop-opacity="0"/></linearGradient>
+                        <linearGradient id="areaG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5BB8AE" stop-opacity=".08"/><stop offset="100%" stop-color="#5BB8AE" stop-opacity="0"/></linearGradient>
+                        <linearGradient id="lineG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5BB8AE" stop-opacity=".15"/><stop offset="100%" stop-color="#5BB8AE" stop-opacity=".65"/></linearGradient>
+                        <filter id="dotGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+                    <line x1="30" y1="10" x2="395" y2="10" stroke="#5BB8AE" stroke-width=".5" opacity=".03"/>
+                    <line x1="30" y1="50" x2="395" y2="50" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="90" x2="395" y2="90" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="130" x2="395" y2="130" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="170" x2="395" y2="170" stroke="#5BB8AE" stroke-width=".5" opacity=".03"/>
+                    <line x1="90" y1="10" x2="90" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".02"/>
+                    <line x1="152" y1="10" x2="152" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".02"/>
+                    <line x1="213" y1="10" x2="213" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".02"/>
+                    <line x1="275" y1="10" x2="275" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".02"/>
+                    <line x1="337" y1="10" x2="337" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".02"/>
+                    <line x1="30" y1="8" x2="30" y2="192" stroke="#5BB8AE" stroke-width=".5" opacity=".06"/>
+                    <line x1="30" y1="190" x2="395" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".08"/>
+                    <text x="22" y="14" fill="#5BB8AE" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">200</text>
+                    <text x="22" y="54" fill="#5BB8AE" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">150</text>
+                    <text x="22" y="94" fill="#5BB8AE" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">100</text>
+                    <text x="22" y="134" fill="#5BB8AE" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">50</text>
+                    <text x="22" y="174" fill="#5BB8AE" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">0</text>
+                    <polygon points="30,165 90,155 152,148 213,132 275,118 337,98 395,88 395,190 30,190" fill="url(#areaG2)"/>
+                    <polyline points="30,165 90,155 152,148 213,132 275,118 337,98 395,88" stroke="#5BB8AE" stroke-width="1" fill="none" opacity=".15" stroke-dasharray="4,4"/>
+                    <polygon points="30,160 90,142 152,135 213,105 275,80 337,48 395,30 395,190 30,190" fill="url(#areaG)"/>
+                    <polyline points="30,160 90,142 152,135 213,105 275,80 337,48 395,30" stroke="url(#lineG)" stroke-width="1.5" fill="none"/>
+                    <circle cx="90" cy="142" r="2" fill="#5BB8AE" opacity=".25"/>
+                    <circle cx="152" cy="135" r="2" fill="#5BB8AE" opacity=".3"/>
+                    <circle cx="213" cy="105" r="2.5" fill="#5BB8AE" opacity=".35"/>
+                    <circle cx="275" cy="80" r="2.5" fill="#5BB8AE" opacity=".4"/>
+                    <circle cx="337" cy="48" r="3" fill="#5BB8AE" opacity=".45"/>
+                    <circle cx="395" cy="30" r="4" fill="#5BB8AE" opacity=".55" filter="url(#dotGlow)"/>
+                    <circle cx="395" cy="30" r="8" fill="none" stroke="#5BB8AE" stroke-width="1" opacity=".12">
+                        <animate attributeName="r" values="8;14;8" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values=".12;.04;.12" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="395" y1="30" x2="395" y2="190" stroke="#5BB8AE" stroke-width=".5" opacity=".06" stroke-dasharray="2,3"/>
+                </svg>
+            </div>
+            <div class="dp-base"></div>
+            <div class="dp-labels"><span>Q1 '24</span><span>Q2 '24</span><span>Q3 '24</span><span>Q4 '24</span><span>Q1 '25</span><span>Q2 '25</span><span>Q3 '25</span></div>
+        </div>
+
+        <!-- PANEL 3 — RING CHART -->
+        <div class="data-panel reveal rd2">
+            <div class="dp-amb dp-amb-1"></div><div class="dp-amb dp-amb-2"></div>
+            <div class="dp-corner dp-corner-tl"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#5BB8AE" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-corner dp-corner-br"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#5BB8AE" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-head">
+                <div><div class="dp-idx">03</div><div class="dp-title">PORTFOLIO DISTRIBUTION</div></div>
+                <div class="dp-kpi"><div class="dp-kpi-val">4</div><div class="dp-kpi-lbl">SEGMENTS</div></div>
+            </div>
+            <div class="dp-donut-layout">
+                <div class="dp-ring">
+                    <svg viewBox="0 0 200 200">
+                        <defs><filter id="ringGlow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                        <circle cx="100" cy="100" r="96" fill="none" stroke="#5BB8AE" stroke-width=".5" opacity=".04"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#5BB8AE" stroke-width="14" opacity=".06" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="62" fill="none" stroke="#5BB8AE" stroke-width=".5" opacity=".06"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#5BB8AE" stroke-width="14" opacity=".5" stroke-dasharray="205.84 284" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 100 100)" filter="url(#ringGlow)"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#5BB8AE" stroke-width="14" opacity=".3" stroke-dasharray="137.23 352.6" stroke-dashoffset="-211.84" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#5BB8AE" stroke-width="14" opacity=".18" stroke-dasharray="88.22 401.6" stroke-dashoffset="-355.07" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#5BB8AE" stroke-width="14" opacity=".1" stroke-dasharray="58.81 430.98" stroke-dashoffset="-449.29" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                        <circle cx="100" cy="100" r="2.5" fill="#5BB8AE" opacity=".3"/>
+                        <line x1="100" y1="14" x2="100" y2="20" stroke="#5BB8AE" stroke-width=".75" opacity=".12"/>
+                        <line x1="186" y1="100" x2="180" y2="100" stroke="#5BB8AE" stroke-width=".75" opacity=".12"/>
+                        <line x1="100" y1="186" x2="100" y2="180" stroke="#5BB8AE" stroke-width=".75" opacity=".12"/>
+                        <line x1="14" y1="100" x2="20" y2="100" stroke="#5BB8AE" stroke-width=".75" opacity=".12"/>
+                    </svg>
+                    <div class="dp-ring-center">
+                        <div class="dp-ring-num">68%</div>
+                        <span class="dp-ring-lbl">TRIAGE™ SCORE</span>
+                    </div>
+                </div>
+                <div class="dp-legend">
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.5"></div><div class="dp-leg-txt">Regulatory</div><div class="dp-leg-val">42%</div></div>
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.3"></div><div class="dp-leg-txt">Clinical</div><div class="dp-leg-val">28%</div></div>
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.18"></div><div class="dp-leg-txt">Market Access</div><div class="dp-leg-val">18%</div></div>
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.1"></div><div class="dp-leg-txt">Capital</div><div class="dp-leg-val">12%</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+    <div class="foot-credit">DESIGNED & DEVELOPED BY</div>
+    <div class="foot-logo">
+        <img src="https://fiapex.com/assets/img/logo/logo.svg" alt="Fiapex" onerror="this.style.display='none';this.parentElement.querySelector('.foot-logo-text').style.display='block'">
+        <div class="foot-logo-text">FIAPEX</div>
+    </div>
+</div>
+
+<script>
+const AR=91,AG=184,AB=174,BG='#0A0E10',SF='#111619';
+
+function initC(id){const c=document.getElementById(id);if(!c)return null;const r=c.parentElement.getBoundingClientRect();const d=window.devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;c.style.width=r.width+'px';c.style.height=r.height+'px';const ctx=c.getContext('2d');ctx.scale(d,d);return{ctx,w:r.width,h:r.height}}
+
+function drawHero(){const o=initC('heroBg');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=BG;ctx.fillRect(0,0,w,h);const cx=w*.82,cy=h*.5;for(let i=0;i<20;i++){const t=i/20;const sy=h*.05+t*h*.9;ctx.beginPath();ctx.moveTo(-w*.05,sy);ctx.bezierCurveTo(w*.3+Math.sin(t*Math.PI*2)*.08*w,h*.5+(sy-h*.5)*.6,w*.6,cy+(sy-cy)*.2,cx,cy);ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.02+Math.abs(t-.5)*.04})`;ctx.lineWidth=1+Math.random()*.5;ctx.stroke()}const g=ctx.createRadialGradient(cx,cy,0,cx,cy,w*.06);g.addColorStop(0,`rgba(${AR},${AG},${AB},.06)`);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle=`rgba(${AR},${AG},${AB},.15)`;ctx.fill()}
+
+function drawV1(){const o=initC('v1');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=SF;ctx.fillRect(0,0,w,h);const n=80;for(let i=0;i<n;i++){const t=i/n;const gridX=w*.6+((i%8)/7)*w*.32;const gridY=h*.15+(Math.floor(i/8)/9)*h*.7;const scatterX=w*.05+Math.random()*w*.35;const scatterY=h*.1+Math.random()*h*.8;const blend=Math.min(1,Math.max(0,(t-.2)/.6));const px=scatterX+(gridX-scatterX)*blend*blend;const py=scatterY+(gridY-scatterY)*blend*blend;const sz=1.5+blend*2.5;ctx.beginPath();ctx.arc(px,py,sz,0,Math.PI*2);ctx.fillStyle=`rgba(${AR},${AG},${AB},${.05+blend*.2})`;ctx.fill()}}
+
+function drawV2(){const o=initC('v2');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=SF;ctx.fillRect(0,0,w,h);for(let i=0;i<25;i++){const t=i/25;const by=h*.06+t*h*.88;ctx.beginPath();const pts=60;for(let j=0;j<=pts;j++){const x=j/pts*w;const nx=x/w;const dc=Math.abs(nx-.5)*2;const dy=Math.abs(t-.5)*2;const a=h*.03*(1-dc)*(1-dy*.5);const f=3+Math.sin(t*Math.PI)*2;const d=Math.sin(nx*Math.PI*f+t*Math.PI*4)*a;const y=by+d;j===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}const cd=Math.abs(t-.5)*2;ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.03+(.1-cd*.08)})`;ctx.lineWidth=.6+(1-cd)*1.2;ctx.stroke()}}
+
+function drawV3(){const o=initC('v3');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=SF;ctx.fillRect(0,0,w,h);const cx=w*.55,cy=h*.45;for(let i=0;i<15;i++){const r=15+i*Math.min(w,h)*.035;ctx.beginPath();const pts=100;for(let j=0;j<=pts;j++){const a=j/pts*Math.PI*2;const nr=r+Math.sin(a*3+i*.8)*r*.1+Math.sin(a*5+i*1.3)*r*.05+Math.cos(a*2+i*.4)*r*.07;const px=cx+Math.cos(a)*nr;const py=cy+Math.sin(a)*nr;j===0?ctx.moveTo(px,py):ctx.lineTo(px,py)}ctx.closePath();ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.25-i*.015})`;ctx.lineWidth=1.2-i*.05;ctx.stroke()}const g=ctx.createRadialGradient(cx,cy,0,cx,cy,25);g.addColorStop(0,`rgba(${AR},${AG},${AB},.1)`);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);ctx.fillStyle=`rgba(${AR},${AG},${AB},.4)`;ctx.shadowColor='#5BB8AE';ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0}
+
+function drawV4(){const o=initC('v4');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=SF;ctx.fillRect(0,0,w,h);const cx=w*.5,cy=h*.5,cols=14,rows=14;function warp(px,py){const dx=px-cx,dy=py-cy;const d=Math.sqrt(dx*dx+dy*dy);const maxD=Math.min(w,h)*.45;const pull=Math.max(0,1-d/maxD);const f=pull*pull*.25;return{x:px+dx*f,y:py+dy*f}}for(let r=0;r<=rows;r++){ctx.beginPath();for(let c=0;c<=cols;c++){const px=c/cols*w,py=r/rows*h;const p=warp(px,py);c===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)}ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.03+Math.abs(r/rows-.5)<.2?.08:.03})`;ctx.lineWidth=1;ctx.stroke()}for(let c=0;c<=cols;c++){ctx.beginPath();for(let r=0;r<=rows;r++){const px=c/cols*w,py=r/rows*h;const p=warp(px,py);r===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)}ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.03+Math.abs(c/cols-.5)<.15?.08:.03})`;ctx.lineWidth=1;ctx.stroke()}ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle=`rgba(${AR},${AG},${AB},.4)`;ctx.shadowColor='#5BB8AE';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0}
+
+function drawV5(){const o=initC('v5');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=SF;ctx.fillRect(0,0,w,h);const cx=w*.5,cy=h*.5;for(let i=0;i<30;i++){const t=i/30;const a=t*Math.PI*2;const sy=h*.5+Math.sin(a)*h*.35;const sx=-w*.05;const ey=h*.5+Math.cos(a)*h*.35;const ex=w*1.05;ctx.beginPath();ctx.moveTo(sx,sy);ctx.bezierCurveTo(w*.25,cy+(sy-cy)*.3,w*.75,cy+(ey-cy)*.3,ex,ey);ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.03+Math.abs(Math.sin(a))*.06})`;ctx.lineWidth=1.1;ctx.stroke()}ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);ctx.fillStyle=`rgba(${AR},${AG},${AB},.3)`;ctx.shadowColor='#5BB8AE';ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0}
+
+function drawV6(){const o=initC('v6');if(!o)return;const{ctx,w,h}=o;ctx.fillStyle=SF;ctx.fillRect(0,0,w,h);const cx=w/2,cy=h/2;const gSize=Math.min(w,h)*.7;const cols=8,rows=8;for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){const x=cx-gSize/2+c/(cols-1)*gSize;const y=cy-gSize/2+r/(rows-1)*gSize;const dx=x-cx,dy=y-cy;const dist=Math.sqrt(dx*dx+dy*dy);const maxD=gSize*.55;const pull=Math.max(0,1-dist/maxD);const px=x+dx*pull*.15;const py=y+dy*pull*.15;const sz=1+pull*2.5;const op=.04+pull*.2;ctx.beginPath();ctx.arc(px,py,sz,0,Math.PI*2);ctx.fillStyle=`rgba(${AR},${AG},${AB},${op})`;ctx.fill();if(c<cols-1){const nx=cx-gSize/2+(c+1)/(cols-1)*gSize;const ny=y;const ndx=nx-cx,ndy=ny-cy;const ndist=Math.sqrt(ndx*ndx+ndy*ndy);const npull=Math.max(0,1-ndist/maxD);const npx=nx+ndx*npull*.15;const npy=ny+ndy*npull*.15;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(npx,npy);ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.02+pull*.04})`;ctx.lineWidth=.5;ctx.stroke()}if(r<rows-1){const nx=x;const ny=cy-gSize/2+(r+1)/(rows-1)*gSize;const ndx=nx-cx,ndy=ny-cy;const ndist=Math.sqrt(ndx*ndx+ndy*ndy);const npull=Math.max(0,1-ndist/maxD);const npx=nx+ndx*npull*.15;const npy=ny+ndy*npull*.15;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(npx,npy);ctx.strokeStyle=`rgba(${AR},${AG},${AB},${.02+pull*.04})`;ctx.lineWidth=.5;ctx.stroke()}}}}
+
+function drawAll(){drawHero();drawV1();drawV2();drawV3();drawV4();drawV5();drawV6()}
+window.addEventListener('load',drawAll);
+window.addEventListener('resize',drawAll);
+
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('prog').style.width=(window.scrollY/h*100)+'%'});
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.data-panel,.vc,.strat-card,.icon-cell').forEach(el=>{el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(600px) rotateY(${x*4}deg) rotateX(${-y*4}deg) scale(1.01)`});el.addEventListener('mouseleave',()=>{el.style.transform=''})});
+</script>
+
+</body>
+</html>
