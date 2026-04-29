@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="Siaxen Fav Icon_1.svg" sizes="any">
+<title>Siaxen · Stylescape</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root{--base:#070912;--surf:#0F131E;--acc:#3A7CA5;--tx:#E8ECF2}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Serif Display',serif;letter-spacing:0.02em;background:linear-gradient(180deg,#090B14 0%,var(--base) 25%,#0A0C16 50%,var(--base) 75%,#090B14 100%);background-attachment:fixed;color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acc);color:var(--base)}
+.pad{padding-left:clamp(16px,4vw,56px);padding-right:clamp(16px,4vw,56px)}
+
+.site-header{position:sticky;top:0;z-index:99;display:flex;align-items:center;padding:22px clamp(24px,4vw,56px);background:var(--base);gap:44px}
+.site-logo{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;flex-shrink:0}
+.site-logo:hover .site-logo-text{opacity:.9}
+.site-logo-icon{width:26px;height:26px;flex-shrink:0}
+.site-logo-icon svg{width:100%;height:100%;display:block}
+.site-logo-text{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--acc);letter-spacing:3px;opacity:.8;transition:opacity .3s}
+.site-nav{display:flex;gap:34px;align-items:center;flex:1}
+.site-nav a{font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;letter-spacing:.2px;color:var(--tx);opacity:.4;text-decoration:none;transition:all .3s}
+.site-nav a:hover{opacity:.7}
+.site-nav a.active{opacity:.75;color:var(--tx)}
+.site-nav-cta{display:flex;align-items:center;gap:14px;margin-left:auto;flex-shrink:0}
+.site-nav .nav-cta{padding:10px 24px;background:var(--acc);color:var(--base);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;letter-spacing:.3px;border:none;opacity:.9;transition:all .3s;text-decoration:none;border-radius:0}
+.site-nav .nav-cta:hover{opacity:1;transform:translateY(-1px)}
+.site-nav .nav-signin{padding:10px 20px;border:1px solid rgba(58,124,165,.3);color:var(--acc);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;letter-spacing:.3px;text-decoration:none;opacity:.55;transition:all .3s;border-radius:0}
+.site-nav .nav-signin:hover{opacity:.8;border-color:rgba(58,124,165,.5)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.nav-toggle span{display:block;width:20px;height:1.5px;background:var(--acc);margin:4px 0;opacity:.5}
+body{padding-top:0}
+@media(max-width:768px){
+    .site-nav{position:fixed;top:44px;right:0;bottom:0;width:240px;background:rgba(9,11,18,.98);backdrop-filter:blur(16px);flex-direction:column;align-items:flex-start;padding:24px 20px;gap:0;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);border-left:1px solid rgba(58,124,165,.06);z-index:100}
+    .site-nav.open{transform:translateX(0)}
+    .site-nav a{padding:12px 0;width:100%;border-bottom:1px solid rgba(58,124,165,.04);font-size:10px;letter-spacing:2px}
+    .site-nav .nav-cta{margin-top:12px;text-align:center;justify-content:center;width:100%}
+    .nav-toggle{display:block}
+}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);z-index:100;width:0;transition:width .05s}
+
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--acc) 1.5px,transparent 1px),linear-gradient(90deg,var(--acc) 1.5px,transparent 1.5px);background-size:80px 80px;opacity:.06}
+.bg-vig{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 30%,var(--base) 80%)}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px 128px}
+body>:not(.bg-grid):not(.bg-vig):not(.bg-noise):not(.progress){position:relative;z-index:1}
+
+.dv{height:1.5px;background:linear-gradient(90deg,transparent,var(--acc),transparent);opacity:.1}
+
+.sh{padding-top:clamp(56px,8vw,96px);padding-bottom:clamp(20px,3vw,32px)}
+.sh-num{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;color:var(--acc)}
+.sh-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,36px);font-weight:400;letter-spacing:0px;color:var(--tx);opacity:.8;margin-top:4px}
+.sh-desc{font-family:'Outfit',sans-serif;font-size:clamp(10px,1.1vw,12px);font-weight:400;color:var(--tx);opacity:.18;line-height:1.8;margin-top:8px;max-width:520px}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+
+/* HERO */
+.hero{min-height:0;display:flex;align-items:flex-start;position:relative;overflow:hidden;padding:clamp(24px,4vw,56px);padding-top:clamp(20px,3vw,40px)}
+
+.hero-inner{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+.hero-label{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;color:var(--acc);margin-bottom:clamp(20px,3vw,36px);opacity:0;animation:hF .8s ease .2s forwards}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(44px,7vw,88px);font-weight:400;letter-spacing:clamp(-0.5px,-.2vw,-0.3px);line-height:.9}
+.hero-w{color:var(--tx);display:block;opacity:0;animation:hF .8s ease .3s forwards}
+.hero-c{color:var(--acc);display:block;opacity:0;animation:hF .8s ease .45s forwards}
+.hero-desc{font-family:'Outfit',sans-serif;margin-top:clamp(16px,3vw,28px);font-size:clamp(11px,1.2vw,13px);font-weight:400;color:var(--tx);opacity:0;line-height:1.9;max-width:440px;animation:hF .8s ease .6s forwards}
+.hero-desc-v{opacity:.3!important}
+.hero-bar{width:48px;height:3px;background:var(--acc);margin-top:clamp(14px,2vw,20px);opacity:0;animation:hF .8s ease .7s forwards}
+.hero-bar-v{opacity:.5!important}
+@keyframes hF{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-pal-wrap{opacity:0;animation:hF .8s ease .5s forwards}
+.hero-pal{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.hp{height:clamp(100px,14vw,140px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(12px,1.5vw,18px);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.hp:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.hp1{background:var(--base);border:1px solid rgba(58,124,165,.08)}
+.hp2{background:var(--surf)}.hp3{background:var(--acc)}.hp4{background:var(--tx)}
+.hp-role{font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:3px;margin-bottom:2px}
+.hp-name{font-size:13px;font-weight:400;letter-spacing:0.1px;margin-bottom:1px}
+.hp-hex{font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px}
+.hp1 .hp-role,.hp2 .hp-role{color:var(--tx);opacity:.3}
+.hp1 .hp-name,.hp2 .hp-name{color:var(--tx);opacity:.65}
+.hp1 .hp-hex,.hp2 .hp-hex{color:var(--tx);opacity:.35}
+.hp3 .hp-role{color:var(--base);opacity:.35}.hp3 .hp-name{color:var(--base);opacity:.7}.hp3 .hp-hex{color:var(--base);opacity:.4}
+.hp4 .hp-role{color:var(--base);opacity:.25}.hp4 .hp-name{color:var(--base);opacity:.5}.hp4 .hp-hex{color:var(--base);opacity:.3}
+.hero-pal-label{font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:4px;color:var(--tx);opacity:.08;text-align:center;margin-top:8px}
+
+/* STRATEGY */
+.strategy{padding:clamp(32px,4vw,48px) clamp(16px,4vw,56px)}
+.strategy-label{font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;color:var(--acc);opacity:.5;margin-bottom:clamp(16px,2.5vw,28px)}
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.strat-card{background:var(--surf);padding:clamp(24px,3.5vw,36px);transition:background .4s;border-top:2.5px solid rgba(58,124,165,.12)}
+.strat-card:hover{background:rgba(18,21,30,.9);border-top-color:rgba(58,124,165,.3)}
+.strat-num{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.3;margin-bottom:12px}
+.strat-title{font-family:'DM Serif Display',serif;font-size:14px;font-weight:400;letter-spacing:0.2px;color:var(--tx);opacity:.7;margin-bottom:8px}
+.strat-desc{font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;color:var(--tx);opacity:.18;line-height:1.8}
+
+/* VISUAL COMPOSITIONS */
+.vis{padding-bottom:clamp(40px,5vw,64px)}
+.vis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.vc{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--surf);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.vc:hover{transform:scale(1.008);z-index:3}
+.vc::after{content:'';position:absolute;inset:0;border:2px solid var(--acc);opacity:.04;pointer-events:none}
+.vc-dl{position:absolute;top:clamp(8px,1.2vw,12px);right:clamp(8px,1.2vw,12px);z-index:6;width:28px;height:28px;border-radius:4px;background:rgba(10,11,18,.7);border:1px solid rgba(58,124,165,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .3s;backdrop-filter:blur(4px)}
+.vc:hover .vc-dl{opacity:1}
+.vc-dl:hover{background:rgba(58,124,165,.15);border-color:rgba(58,124,165,.3)}
+.vc-dl svg{width:14px;height:14px}
+.vc-lbl{position:absolute;bottom:clamp(10px,1.5vw,14px);left:clamp(10px,1.5vw,14px);font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.3;z-index:5}
+
+
+/* TYPOGRAPHY */
+.typo{padding-bottom:clamp(40px,5vw,64px)}
+.typo-strip{display:grid;grid-template-columns:1.3fr 1fr;gap:4px}
+.typo-main{background:var(--surf);padding:clamp(28px,5vw,56px);position:relative;overflow:hidden}
+.typo-bg{position:absolute;inset:0;pointer-events:none}
+.tb-grid{position:absolute;right:0;top:0;bottom:0;width:30%;background-image:linear-gradient(var(--acc) 1px,transparent 1px),linear-gradient(90deg,var(--acc) 1px,transparent 1px);background-size:28px 28px;opacity:.015}
+.typo-tag{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.4;margin-bottom:16px;position:relative;z-index:2}
+.typo-h{font-size:clamp(36px,5vw,60px);font-weight:400;letter-spacing:clamp(-0.3px,-.1vw,-0.2px);line-height:1.1;position:relative;z-index:2}
+.typo-h em{font-style:normal;color:var(--acc)}
+.typo-samples{margin-top:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+.typo-sample{display:flex;align-items:baseline;gap:14px}
+.typo-sample-label{font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.25;width:56px;flex-shrink:0}
+.typo-side{background:var(--surf);padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;justify-content:center}
+.typo-side-tag{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.4;margin-bottom:16px}
+.ui-btns{display:flex;flex-direction:column;gap:14px}
+.btn-p{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--acc);color:var(--base);border:none;font-family:'Outfit',sans-serif;width:fit-content;cursor:pointer;transition:all .3s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(58,124,165,.12)}
+.btn-o{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--acc);border:2px solid var(--acc);background:transparent;font-family:'Outfit',sans-serif;width:fit-content;opacity:.4;cursor:pointer;transition:all .3s}
+.btn-o:hover{opacity:.65;transform:translateY(-2px)}
+.btn-t{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;color:var(--acc);opacity:.3;border:none;background:none;font-family:'Outfit',sans-serif;padding:6px 0;width:fit-content;cursor:pointer}
+.btn-t-line{width:16px;height:1.5px;background:var(--acc)}
+
+/* ICONOGRAPHY */
+.icons{padding-bottom:clamp(40px,5vw,64px)}
+.icons-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.icon-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:clamp(24px,3.5vw,44px) 12px;background:var(--surf);border:1px solid var(--base);transition:all .4s cubic-bezier(.16,1,.3,1)}
+.icon-cell:hover{background:var(--base);border-color:rgba(58,124,165,.06);transform:translateY(-3px)}
+.icon-svg{width:48px;height:48px;flex-shrink:0;transition:transform .4s}
+.icon-cell:hover .icon-svg{transform:scale(1.08)}
+.icon-svg svg{width:100%;height:100%}
+.icon-name{font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.25;text-align:center;transition:all .4s}
+.icon-cell:hover .icon-name{color:var(--acc);opacity:.4}
+
+/* DATA — PREMIUM */
+.data{padding-bottom:clamp(40px,5vw,64px)}
+.data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.data-panel{background:var(--surf);padding:clamp(30px,4.5vw,52px) clamp(24px,3.5vw,44px);position:relative;overflow:hidden;transition:background .4s,transform .4s cubic-bezier(.16,1,.3,1)}
+.data-panel:hover{background:rgba(18,21,30,.95);transform:translateY(-2px)}
+.data-panel::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(58,124,165,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(58,124,165,.025) 1px,transparent 1px);background-size:32px 32px}
+.data-panel::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(58,124,165,.18),transparent);pointer-events:none}
+.dp-amb{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.dp-amb-1{width:200px;height:200px;top:-60px;right:-40px;background:radial-gradient(circle,rgba(58,124,165,.04) 0%,transparent 70%)}
+.dp-amb-2{width:240px;height:240px;bottom:-80px;left:-50px;background:radial-gradient(circle,rgba(58,124,165,.025) 0%,transparent 70%)}
+.dp-corner{position:absolute;pointer-events:none;z-index:3}
+.dp-corner svg{width:12px;height:12px}
+.dp-corner-tl{top:10px;left:10px}
+.dp-corner-br{bottom:10px;right:10px;transform:rotate(180deg)}
+.dp-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(20px,3vw,32px);position:relative;z-index:2}
+.dp-idx{font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.2}
+.dp-title{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.55;margin-top:3px}
+.dp-kpi{text-align:right}
+.dp-kpi-val{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.2vw,36px);font-weight:400;letter-spacing:-0.5px;color:var(--acc);opacity:.4;line-height:1}
+.dp-kpi-lbl{font-family:'Outfit',sans-serif;font-size:6px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.15;margin-top:3px}
+.dp-chart{position:relative;z-index:2;height:clamp(150px,18vw,220px)}
+.dp-chart svg{width:100%;height:100%;overflow:visible}
+.dp-base{height:1px;background:var(--acc);opacity:.1;position:relative;z-index:2;margin-top:2px}
+.dp-labels{display:flex;justify-content:space-between;margin-top:10px;position:relative;z-index:2}
+.dp-labels span{font-size:6px;font-weight:600;letter-spacing:1px;color:var(--acc);opacity:.15}
+.dp-donut-layout{display:flex;align-items:center;gap:clamp(20px,3vw,36px);height:100%;position:relative;z-index:2}
+.dp-ring{position:relative;flex-shrink:0;width:clamp(120px,15vw,170px);height:clamp(120px,15vw,170px)}
+.dp-ring svg{width:100%;height:100%}
+.dp-ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.dp-ring-num{font-family:'DM Serif Display',serif;font-size:clamp(26px,3.5vw,36px);font-weight:400;letter-spacing:-0.5px;color:var(--acc);opacity:.5;line-height:1}
+.dp-ring-lbl{font-family:'Outfit',sans-serif;font-size:6px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.18;margin-top:3px;display:block}
+.dp-legend{display:flex;flex-direction:column;gap:14px}
+.dp-leg{display:flex;align-items:center;gap:10px}
+.dp-leg-bar{width:20px;height:2px;border-radius:1px;flex-shrink:0;background:var(--acc)}
+.dp-leg-txt{font-family:'Outfit',sans-serif;font-size:8px;font-weight:500;color:var(--tx);opacity:.2}
+.dp-leg-val{font-family:'DM Serif Display',serif;font-size:11px;font-weight:400;letter-spacing:-.3px;color:var(--acc);opacity:.3;margin-left:auto;padding-left:12px}
+
+/* FOOTER */
+.foot{padding:clamp(44px,6vw,72px) clamp(16px,4vw,56px);border-top:1px solid rgba(58,124,165,.08);display:flex;flex-direction:column;align-items:center;gap:16px}
+.foot-credit{font-family:'Outfit',sans-serif;font-size:8px;font-weight:500;letter-spacing:2px;color:var(--tx);opacity:.08}
+.foot-logo img{height:20px;opacity:.15;filter:grayscale(1) brightness(2)}
+.foot-logo-text{font-size:14px;font-weight:700;letter-spacing:3px;color:var(--tx);opacity:.12;display:none}
+
+@media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr}.hero-pal-wrap{margin-top:32px}
+    .strategy-grid{grid-template-columns:1fr}
+    .typo-strip{grid-template-columns:1fr}
+    .vis-grid{grid-template-columns:repeat(2,1fr)}
+    .icons-grid{grid-template-columns:repeat(3,1fr)}
+    .data-grid{grid-template-columns:1fr}
+    .dp-donut-layout{flex-direction:column;align-items:center;text-align:center}
+    .dp-legend{width:100%;max-width:280px}
+    .dp-ring{width:clamp(140px,40vw,180px);height:clamp(140px,40vw,180px)}
+}
+@media(max-width:600px){
+    .vis-grid{grid-template-columns:repeat(2,1fr)}
+    .icons-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-title{font-size:clamp(36px,12vw,56px)}
+    .typo-h{font-size:clamp(28px,8vw,44px)}
+    .sh-desc{max-width:100%}
+    .strat-desc{font-size:9px}
+    .dp-donut-layout{gap:20px}
+    .dp-head{flex-wrap:wrap;gap:8px}
+    .dp-ring{width:130px;height:130px}
+    .dp-leg-txt{font-size:7px}
+    .dp-leg-val{font-size:10px}
+}
+
+/* ═══════════════════════════════════════════════════
+   THEME TOGGLE BUTTON
+   ═══════════════════════════════════════════════════ */
+.theme-toggle{width:34px;height:34px;border:1px solid rgba(58,124,165,.18);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.theme-toggle:hover{border-color:rgba(58,124,165,.4);background:rgba(58,124,165,.06)}
+.theme-toggle svg{width:15px;height:15px;position:absolute;transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .3s}
+.tt-sun{color:var(--acc);opacity:1;transform:rotate(0) scale(1)}
+.tt-moon{color:var(--acc);opacity:0;transform:rotate(90deg) scale(.5)}
+[data-theme="light"] .tt-sun{opacity:0;transform:rotate(-90deg) scale(.5)}
+[data-theme="light"] .tt-moon{opacity:1;transform:rotate(0) scale(1)}
+
+/* ═══════════════════════════════════════════════════
+   LIGHT THEME
+   ═══════════════════════════════════════════════════ */
+[data-theme="light"]{--base:#FFFFFF;--surf:#F0F4F8;--acc:#3A7CA5;--tx:#1A2030}
+[data-theme="light"] body{background:#FFFFFF}
+[data-theme="light"] ::selection{background:var(--acc);color:#fff}
+
+/* Background layers */
+[data-theme="light"] .bg-grid{opacity:.13;background-image:linear-gradient(var(--acc) 1px,transparent 1px),linear-gradient(90deg,var(--acc) 1px,transparent 1px)}
+[data-theme="light"] .bg-vig{background:none}
+[data-theme="light"] .bg-noise{opacity:0}
+
+/* Header */
+[data-theme="light"] .site-header{border-bottom:1px solid #E2E5EB;box-shadow:none}
+[data-theme="light"] .site-logo-icon img{filter:brightness(0)!important;opacity:.9!important}
+[data-theme="light"] .site-logo-text{color:var(--acc)}
+[data-theme="light"] .site-nav .nav-signin{border-color:#D0D5DD;color:var(--tx)}
+[data-theme="light"] .site-nav .nav-signin:hover{border-color:var(--acc);color:var(--acc)}
+[data-theme="light"] .nav-toggle span{background:var(--tx)}
+
+/* Hero palette cards */
+[data-theme="light"] .hp1{background:#FFFFFF;border:1px solid #E2E5EB}
+[data-theme="light"] .hp2{border:1px solid #E2E5EB}
+[data-theme="light"] .hp1 .hp-role,[data-theme="light"] .hp2 .hp-role{color:var(--tx)}
+[data-theme="light"] .hp1 .hp-name,[data-theme="light"] .hp2 .hp-name{color:var(--tx)}
+[data-theme="light"] .hp1 .hp-hex,[data-theme="light"] .hp2 .hp-hex{color:var(--tx)}
+[data-theme="light"] .hp3 .hp-role,[data-theme="light"] .hp3 .hp-name,[data-theme="light"] .hp3 .hp-hex{color:#fff}
+[data-theme="light"] .hp4 .hp-role,[data-theme="light"] .hp4 .hp-name,[data-theme="light"] .hp4 .hp-hex{color:#FFFFFF}
+
+/* Strategy cards */
+[data-theme="light"] .strat-card{border:1px solid #E2E5EB;border-top:2.5px solid var(--acc);box-shadow:none}
+[data-theme="light"] .strat-card:hover{background:#F8F9FB;box-shadow:none}
+
+/* Visual compositions */
+[data-theme="light"] .vc{border:1px solid #E2E5EB;box-shadow:none}
+[data-theme="light"] .vc::after{border-color:transparent}
+[data-theme="light"] .vc-dl{background:#FFFFFF;border:1px solid #E2E5EB}
+[data-theme="light"] .vc-dl:hover{background:#F8F9FB;border-color:var(--acc)}
+
+/* Typography */
+[data-theme="light"] .typo-main,[data-theme="light"] .typo-side{border:1px solid #E2E5EB;box-shadow:none}
+[data-theme="light"] .typo-h em{color:var(--acc)}
+
+/* Buttons in light */
+[data-theme="light"] .btn-p{box-shadow:none}
+[data-theme="light"] .btn-p:hover{box-shadow:0 2px 8px rgba(58,124,165,.15)}
+
+/* Icons */
+[data-theme="light"] .icon-cell{border:1px solid #E2E5EB;background:#FFFFFF;box-shadow:none}
+[data-theme="light"] .icon-cell:hover{background:#F8F9FB;border-color:var(--acc)}
+
+/* Data panels */
+[data-theme="light"] .data-panel{border:1px solid #E2E5EB;box-shadow:none}
+[data-theme="light"] .data-panel:hover{background:#F8F9FB}
+[data-theme="light"] .data-panel::after{background:linear-gradient(90deg,transparent,rgba(58,124,165,.06),transparent)}
+[data-theme="light"] .data-panel::before{background-image:linear-gradient(rgba(0,0,0,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.02) 1px,transparent 1px)}
+
+/* Dividers */
+[data-theme="light"] .dv{background:linear-gradient(90deg,transparent,#E2E5EB,transparent);opacity:1}
+
+/* Footer */
+[data-theme="light"] .foot{border-top:1px solid #E2E5EB}
+[data-theme="light"] .foot-logo img{filter:grayscale(1);opacity:.3}
+
+/* Mobile nav */
+@media(max-width:768px){[data-theme="light"] .site-nav{background:rgba(255,255,255,.98);border-left:1px solid #E2E5EB}}
+
+/* Smooth theme transitions */
+body,.site-header,.strat-card,.vc,.icon-cell,.data-panel,.typo-main,.typo-side,.dv,.foot,.vc-dl,.btn-p,.btn-o,.hp{transition:background-color .4s ease,border-color .35s ease,box-shadow .35s ease}
+.sh-num,.sh-title,.sh-desc,.hero-label,.hero-w,.hero-c,.hero-desc,.strat-num,.strat-title,.strat-desc,.vc-lbl,.typo-tag,.typo-h,.icon-name,.dp-idx,.dp-title,.dp-kpi-val,.dp-kpi-lbl,.dp-ring-num,.dp-ring-lbl,.dp-leg-txt,.dp-leg-val,.dp-labels span,.foot-credit,.hero-pal-label,.strategy-label,.typo-sample-label,.typo-side-tag,.hp-role,.hp-name,.hp-hex{transition:color .35s ease}
+
+/* Light mode: text hierarchy */
+[data-theme="light"] .sh-num{opacity:1;color:var(--acc)}
+[data-theme="light"] .sh-title{opacity:1;color:#1A2030}
+[data-theme="light"] .sh-desc{opacity:1;color:#4A5568}
+[data-theme="light"] .hero-label{opacity:1;color:var(--acc)}
+[data-theme="light"] .hero-w{color:#1A2030}
+[data-theme="light"] .hero-c{color:var(--acc)}
+[data-theme="light"] .hero-desc,[data-theme="light"] .hero-desc-v{opacity:1!important;color:#4A5568}
+[data-theme="light"] .hero-bar{opacity:1}
+[data-theme="light"] .strat-num{opacity:1;color:var(--acc)}
+[data-theme="light"] .strat-title{opacity:1;color:#1A2030}
+[data-theme="light"] .strat-desc{opacity:1;color:#4A5568}
+[data-theme="light"] .strategy-label{opacity:1;color:var(--acc)}
+[data-theme="light"] .typo-tag{opacity:1;color:var(--acc)}
+[data-theme="light"] .typo-h{color:#1A2030}
+[data-theme="light"] .typo-sample-label{opacity:1;color:var(--acc)}
+[data-theme="light"] .typo-side-tag{opacity:1;color:var(--acc)}
+[data-theme="light"] .hero-pal-label{opacity:1;color:#9CA3AF}
+[data-theme="light"] .foot-credit{opacity:1;color:#9CA3AF}
+[data-theme="light"] .btn-o{color:var(--acc);border-color:var(--acc);opacity:.7}
+[data-theme="light"] .btn-t{color:var(--acc);opacity:.6}
+
+/* Light mode: palette cards text */
+[data-theme="light"] .hp1 .hp-role,[data-theme="light"] .hp2 .hp-role{opacity:1;color:#6B7280}
+[data-theme="light"] .hp1 .hp-name,[data-theme="light"] .hp2 .hp-name{opacity:1;color:#1A2030}
+[data-theme="light"] .hp1 .hp-hex,[data-theme="light"] .hp2 .hp-hex{opacity:1;color:#4A5568}
+[data-theme="light"] .hp3 .hp-role{opacity:1;color:rgba(255,255,255,.7)}
+[data-theme="light"] .hp3 .hp-name{opacity:1;color:#FFFFFF}
+[data-theme="light"] .hp3 .hp-hex{opacity:1;color:rgba(255,255,255,.8)}
+[data-theme="light"] .hp4 .hp-role{opacity:1;color:rgba(255,255,255,.5)}
+[data-theme="light"] .hp4 .hp-name{opacity:1;color:#FFFFFF}
+[data-theme="light"] .hp4 .hp-hex{opacity:1;color:rgba(255,255,255,.7)}
+
+/* Light mode: data panels */
+[data-theme="light"] .dp-base{opacity:.3}
+[data-theme="light"] .dp-labels span{opacity:1;color:#6B7280}
+[data-theme="light"] .dp-leg-bar{opacity:.85!important}
+[data-theme="light"] .dp-idx{opacity:1;color:var(--acc)}
+[data-theme="light"] .dp-title{opacity:1;color:var(--acc)}
+[data-theme="light"] .dp-kpi-val{opacity:1;color:var(--acc)}
+[data-theme="light"] .dp-kpi-lbl{opacity:1;color:#6B7280}
+[data-theme="light"] .dp-ring-num{opacity:1;color:var(--acc)}
+[data-theme="light"] .dp-ring-lbl{opacity:1;color:#6B7280}
+[data-theme="light"] .dp-leg-txt{opacity:1;color:#4A5568}
+[data-theme="light"] .dp-leg-val{opacity:1;color:var(--acc)}
+[data-theme="light"] .dp-corner svg path{opacity:.3}
+[data-theme="light"] .vc-lbl{opacity:1;color:var(--acc)}
+[data-theme="light"] .icon-name{opacity:1;color:var(--acc)}
+
+/* Light mode: icon SVGs */
+[data-theme="light"] .icon-svg svg *[stroke="#3A7CA5"]{stroke:var(--acc)}
+[data-theme="light"] .icon-svg svg *[fill="#3A7CA5"]{fill:var(--acc)}
+
+/* Light mode: typography samples */
+[data-theme="light"] .typo-sample-label{color:var(--acc)}
+[data-theme="light"] .typo-h em{color:var(--acc)}
+[data-theme="light"] .typo-samples .typo-sample div:last-child{color:#1A2030!important;opacity:.6!important}
+
+/* Light mode: alternate section backgrounds */
+[data-theme="light"] .strategy{background:#F7F9FC}
+[data-theme="light"] .icons{background:#F7F9FC}
+[data-theme="light"] .data{background:#F7F9FC}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+    <a class="site-logo" href="#">
+        <div class="site-logo-icon" style="width:100px;height:auto">
+            <img src="Siaxen wordmark.svg" alt="Siaxen" style="width:100%;height:auto;filter:brightness(0) invert(1);opacity:.85">
+        </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="siteNav">
+        <a href="#" class="active">About</a>
+        <a href="#">TRIAGE&trade;</a>
+        <a href="#">Inventors</a>
+        <a href="#">Investors</a>
+        <a href="#">Incubators</a>
+        <a href="#">Partners</a>
+        <div class="site-nav-cta">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg class="tt-sun" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="1.5" x2="9" y2="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="14.5" x2="9" y2="16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1.5" y1="9" x2="3.5" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="14.5" y1="9" x2="16.5" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3.7" y1="3.7" x2="5.1" y2="5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12.9" y1="12.9" x2="14.3" y2="14.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3.7" y1="14.3" x2="5.1" y2="12.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12.9" y1="5.1" x2="14.3" y2="3.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg class="tt-moon" viewBox="0 0 18 18" fill="none"><path d="M14.5 10.2A5.8 5.8 0 017.8 3.5 6.5 6.5 0 1014.5 10.2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a href="#" class="nav-signin">Explore TRIAGE&trade;</a>
+            <a href="#" class="nav-cta">Contact us →</a>
+        </div>
+    </nav>
+</header>
+<div class="progress" id="prog"></div>
+<div class="bg-grid"></div>
+<div class="bg-vig"></div>
+<div class="bg-noise"></div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div>
+            <div class="hero-label">STYLESCAPE · DIRECTION 01</div>
+            <div class="hero-title"><span class="hero-w">Atlantic</span><span class="hero-c">Depth</span></div>
+            <div class="hero-desc hero-desc-v">Inspired by the contrast between disorder and structure. The visual identity uses geometric lines that shift from scattered to synchronized, mirroring the brand's core promise. Atlantic blue carries the precision of deep water — measured, composed, and commanding. It reflects the brand's core character: authority earned through substance, not claimed through volume. No MedTech competitor occupies this tone.</div>
+            <div class="hero-bar hero-bar-v"></div>
+        </div>
+        <div class="hero-pal-wrap">
+            <div class="hero-pal">
+                <div class="hp hp1"><div class="hp-role">BASE</div><div class="hp-name">Deep Atlantic</div><div class="hp-hex">#070912</div></div>
+                <div class="hp hp2"><div class="hp-role">SURFACE</div><div class="hp-name">Harbor</div><div class="hp-hex">#0F131E</div></div>
+                <div class="hp hp3"><div class="hp-role">ACCENT</div><div class="hp-name">Atlantic</div><div class="hp-hex">#3A7CA5</div></div>
+                <div class="hp hp4"><div class="hp-role">TEXT</div><div class="hp-name">Silver</div><div class="hp-hex">#E8ECF2</div></div>
+            </div>
+            <div class="hero-pal-label">COLOUR PALETTE</div>
+        </div>
+    </div>
+</section>
+
+<!-- STRATEGY -->
+<div class="strategy">
+    <div class="strategy-label">WHY THIS DIRECTION</div>
+    <div class="strategy-grid">
+        <div class="strat-card reveal"><div class="strat-num">01</div><div class="strat-title">Atlantic, not silver</div><div class="strat-desc">Silver signals cold detachment. Atlantic blue signals calculated precision. The brand strategy defines a Ruler archetype that leads through substance. This blue carries depth without coldness, sitting exactly between authority and clarity.</div></div>
+        <div class="strat-card reveal rd1"><div class="strat-num">02</div><div class="strat-title">Scattered to synchronized</div><div class="strat-desc">The brand promise is replacing fragmentation with architecture. The visual concept translates this directly: disordered lines becoming structured grids. The identity doesn't just describe the mission, it demonstrates it.</div></div>
+        <div class="strat-card reveal rd2"><div class="strat-num">03</div><div class="strat-title">Institutional, not decorative</div><div class="strat-desc">The strategy scores 5/5 on seriousness and 1/5 on organic feel. Every visual element exists because it communicates something, not because it looks appealing. This is a brand that builds systems, and the design reflects that discipline.</div></div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- VISUAL LANGUAGE -->
+<div class="sh pad reveal"><div class="sh-num">01 · VISUAL DIRECTION</div><div class="sh-title">Visual Language</div><div class="sh-desc">These patterns translate the brand's core concept into visual form. Each one expresses "disorder becoming structure" differently, giving the identity a consistent visual vocabulary.</div></div>
+<div class="vis pad">
+    <div class="vis-grid">
+        <div class="vc reveal">
+            <svg viewBox="0 0 300 300" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".3" transform="rotate(5 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".3" transform="rotate(-5 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".2" transform="rotate(14 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".2" transform="rotate(-14 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".1" transform="rotate(23 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".1" transform="rotate(-23 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".04" transform="rotate(32 150 24)"/>
+            <line x1="150" y1="24" x2="150" y2="276" stroke="#3A7CA5" stroke-width="2" opacity=".04" transform="rotate(-32 150 24)"/>
+            <circle cx="150" cy="24" r="4" fill="#3A7CA5" opacity=".5"/>
+            </svg>
+            <div class="vc-dl"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="vc-lbl">CONVERGENCE</div>
+        </div>
+        <div class="vc reveal rd1">
+            <svg viewBox="0 0 300 300" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <line x1="30" y1="48" x2="270" y2="48" stroke="#3A7CA5" stroke-width="2" opacity=".06"/>
+            <line x1="30" y1="84" x2="270" y2="84" stroke="#3A7CA5" stroke-width="2" opacity=".12"/>
+            <line x1="30" y1="120" x2="270" y2="120" stroke="#3A7CA5" stroke-width="2" opacity=".22"/>
+            <line x1="30" y1="156" x2="270" y2="156" stroke="#3A7CA5" stroke-width="2" opacity=".45"/>
+            <line x1="30" y1="192" x2="270" y2="192" stroke="#3A7CA5" stroke-width="2" opacity=".22"/>
+            <line x1="30" y1="228" x2="270" y2="228" stroke="#3A7CA5" stroke-width="2" opacity=".12"/>
+            <line x1="30" y1="264" x2="270" y2="264" stroke="#3A7CA5" stroke-width="2" opacity=".06"/>
+            <circle cx="150" cy="156" r="4" fill="#3A7CA5" opacity=".5"/>
+            </svg>
+            <div class="vc-dl"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="vc-lbl">SIGNAL CLARITY</div>
+        </div>
+        <div class="vc reveal rd2">
+            <svg viewBox="0 0 300 300" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <polygon points="43.4,38.9 108.4,33.9 112.6,80.4 47.6,85.5" stroke="#3A7CA5" stroke-width="2" opacity=".35" fill="none"/>
+            <rect x="206.4" y="13.9" width="51.1" height="78.8" stroke="#3A7CA5" stroke-width="2" opacity=".35" fill="none" transform="matrix(0.061 -0.998 0.998 0.061 164.616 281.57)"/>
+            <rect x="27.6" y="122.7" width="59.6" height="61.7" stroke="#3A7CA5" stroke-width="2" opacity=".35" fill="none" transform="matrix(0.1045 -0.9945 0.9945 0.1045 -101.292 194.594)"/>
+            <polygon points="133.2,108.6 212.1,105.6 214.4,175.8 135.5,178.8" stroke="#3A7CA5" stroke-width="2" opacity=".35" fill="none"/>
+            <polygon points="195.8,206.6 259.1,203.2 265.2,271.2 201.9,274.6" stroke="#3A7CA5" stroke-width="2" opacity=".35" fill="none"/>
+            <rect x="69.2" y="209.6" width="44.7" height="72.4" stroke="#3A7CA5" stroke-width="2" opacity=".35" fill="none" transform="matrix(0.0523 -0.9986 0.9986 0.0523 -158.616 324.351)"/>
+            </svg>
+            <div class="vc-dl"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="vc-lbl">FRAGMENTATION</div>
+        </div>
+        <div class="vc reveal">
+            <svg viewBox="0 0 400 300" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <circle cx="200" cy="150" r="118" stroke="#3A7CA5" stroke-width="2" opacity="0.16" fill="none"/><circle cx="200" cy="150" r="78" stroke="#3A7CA5" stroke-width="2" opacity="0.24" fill="none"/><circle cx="200" cy="150" r="39" stroke="#3A7CA5" stroke-width="2" opacity="0.4" fill="none"/>
+            <ellipse cx="200" cy="150" rx="157" ry="65" stroke="#3A7CA5" stroke-width="2" opacity="0.12" fill="none" transform="rotate(-20 200 150)"/><ellipse cx="200" cy="150" rx="46" ry="118" stroke="#3A7CA5" stroke-width="2" opacity="0.2" fill="none" transform="rotate(-75 200 150)"/>
+            <circle cx="200" cy="150" r="4" fill="#3A7CA5" opacity=".5"/><circle cx="297" cy="147" r="2.5" fill="#3A7CA5" opacity="0.6"/><circle cx="113" cy="161" r="2.5" fill="#3A7CA5" opacity="0.5"/><circle cx="239" cy="72" r="2.5" fill="#3A7CA5" opacity="0.35"/><circle cx="131" cy="231" r="2.5" fill="#3A7CA5" opacity="0.3"/>
+            </svg>
+            <div class="vc-dl"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="vc-lbl">SYNCHRONIZATION</div>
+        </div>
+        <div class="vc reveal rd1">
+            <svg viewBox="0 0 300 300" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <rect x="25" y="25" width="250" height="250" stroke="#3A7CA5" stroke-width="2" opacity="0.06"/>
+            <rect x="56" y="56" width="188" height="188" stroke="#3A7CA5" stroke-width="2" opacity="0.14"/>
+            <rect x="88" y="88" width="124" height="124" stroke="#3A7CA5" stroke-width="2" opacity="0.24"/>
+            <rect x="119" y="119" width="62" height="62" stroke="#3A7CA5" stroke-width="2" opacity="0.38"/>
+            <circle cx="150" cy="150" r="3" fill="#3A7CA5" opacity="0.5"/>
+            </svg>
+            <div class="vc-dl"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="vc-lbl">ARCHITECTURE</div>
+        </div>
+        <div class="vc reveal rd2">
+            <svg viewBox="0 0 400 400" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <rect x="30" y="40" width="40" height="40" stroke="#3A7CA5" stroke-width="2" opacity=".06" transform="rotate(-12 50 60)"/>
+            <rect x="320" y="30" width="45" height="35" stroke="#3A7CA5" stroke-width="2" opacity=".06" transform="rotate(8 342 47)"/>
+            <rect x="20" y="300" width="38" height="42" stroke="#3A7CA5" stroke-width="2" opacity=".06" transform="rotate(15 39 321)"/>
+            <rect x="330" y="310" width="42" height="38" stroke="#3A7CA5" stroke-width="2" opacity=".06" transform="rotate(-10 351 329)"/>
+            <rect x="100" y="110" width="44" height="44" stroke="#3A7CA5" stroke-width="2" opacity=".14" transform="rotate(-5 122 132)"/>
+            <rect x="255" y="105" width="44" height="44" stroke="#3A7CA5" stroke-width="2" opacity=".14" transform="rotate(4 277 127)"/>
+            <rect x="95" y="250" width="44" height="44" stroke="#3A7CA5" stroke-width="2" opacity=".14" transform="rotate(6 117 272)"/>
+            <rect x="260" y="255" width="44" height="44" stroke="#3A7CA5" stroke-width="2" opacity=".14" transform="rotate(-3 282 277)"/>
+            <rect x="155" y="155" width="42" height="42" stroke="#3A7CA5" stroke-width="2" opacity=".32" transform="rotate(0.5 176 176)"/>
+            <rect x="203" y="155" width="42" height="42" stroke="#3A7CA5" stroke-width="2" opacity=".32" transform="rotate(-0.5 224 176)"/>
+            <rect x="155" y="203" width="42" height="42" stroke="#3A7CA5" stroke-width="2" opacity=".32" transform="rotate(-0.5 176 224)"/>
+            <rect x="203" y="203" width="42" height="42" stroke="#3A7CA5" stroke-width="2" opacity=".32" transform="rotate(0.5 224 224)"/>
+            <circle cx="200" cy="200" r="4" fill="#3A7CA5" opacity=".5"/>
+            </svg>
+            <div class="vc-dl"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="#3A7CA5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="vc-lbl">INTEGRATION</div>
+        </div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- TYPOGRAPHY + UI -->
+<div class="sh pad reveal"><div class="sh-num">02 · TYPE SYSTEM</div><div class="sh-title">DM Serif Display</div><div class="sh-desc">A serif chosen for its institutional character. DM Serif Display carries the weight of established institutions, not startups. High-contrast strokes and editorial warmth give every headline a sense of permanence. Outfit supports labels, data, and interface elements as the secondary typeface.</div></div>
+<div class="typo pad">
+    <div class="typo-strip reveal">
+        <div class="typo-main">
+            <div class="typo-bg"><div class="tb-grid"></div></div>
+            <div class="typo-tag">DM SERIF DISPLAY · HEADLINES</div>
+            <div class="typo-h" style="font-family:'DM Serif Display',serif;font-weight:400">Your discovery.<br><em>Synchronized.</em><br>Investable.</div>
+            <div class="typo-samples">
+                <div class="typo-sample"><div class="typo-sample-label">DISPLAY</div><div style="font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;letter-spacing:0px;color:var(--tx);opacity:.3">Regular 400</div></div>
+                <div class="typo-sample"><div class="typo-sample-label">BODY</div><div style="font-family:'DM Serif Display',serif;font-size:14px;font-style:italic;font-weight:400;color:var(--tx);opacity:.2">Italic 400</div></div>
+                <div class="typo-sample"><div class="typo-sample-label">LABEL</div><div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;color:var(--acc);opacity:.35">OUTFIT 700</div></div>
+            </div>
+        </div>
+        <div class="typo-side">
+            <div class="typo-side-tag">INTERFACE ELEMENTS</div>
+            <div class="ui-btns">
+                <button class="btn-p">Explore TRIAGE™ →</button>
+                <button class="btn-o">Learn more →</button>
+                <button class="btn-t">How it works <span class="btn-t-line"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ICONOGRAPHY -->
+<div class="sh pad reveal"><div class="sh-num">03 · ICONOGRAPHY</div><div class="sh-title">Icon System</div><div class="sh-desc">All icons share the same visual rules: straight lines, sharp angles, clean outlines, no filled shapes. Each one represents a core brand concept using the same geometric language as the rest of the identity.</div></div>
+<div class="icons pad">
+    <div class="icons-grid reveal">
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".25"/><rect x="14" y="14" width="20" height="20" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".35"/><rect x="20" y="20" width="8" height="8" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#3A7CA5" stroke-width="1.5" opacity=".12"/><line x1="42" y1="6" x2="34" y2="14" stroke="#3A7CA5" stroke-width="1.5" opacity=".12"/><line x1="6" y1="42" x2="14" y2="34" stroke="#3A7CA5" stroke-width="1.5" opacity=".12"/><line x1="42" y1="42" x2="34" y2="34" stroke="#3A7CA5" stroke-width="1.5" opacity=".12"/></svg></div><div class="icon-name">ARCHITECTURE</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="24" y1="4" x2="24" y2="20" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><line x1="44" y1="24" x2="28" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><line x1="24" y1="44" x2="24" y2="28" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><line x1="4" y1="24" x2="20" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><circle cx="24" cy="24" r="4" stroke="#3A7CA5" stroke-width="1.5" opacity=".45"/><circle cx="24" cy="4" r="2" fill="#3A7CA5" opacity=".25"/><circle cx="44" cy="24" r="2" fill="#3A7CA5" opacity=".25"/><circle cx="24" cy="44" r="2" fill="#3A7CA5" opacity=".25"/><circle cx="4" cy="24" r="2" fill="#3A7CA5" opacity=".25"/></svg></div><div class="icon-name">CONVERGENCE</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><circle cx="24" cy="24" r="10" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><line x1="24" y1="2" x2="24" y2="14" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="24" y1="34" x2="24" y2="46" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="2" y1="24" x2="14" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="34" y1="24" x2="46" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><circle cx="24" cy="24" r="2.5" stroke="#3A7CA5" stroke-width="1.5" opacity=".5"/></svg></div><div class="icon-name">PRECISION</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="6" y1="42" x2="42" y2="42" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><rect x="8" y="30" width="6" height="12" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><rect x="17" y="24" width="6" height="18" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".25"/><rect x="26" y="16" width="6" height="26" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".35"/><rect x="35" y="8" width="6" height="34" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".5"/></svg></div><div class="icon-name">GROWTH</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L40 12 L40 26 C40 34 33 40 24 44 C15 40 8 34 8 26 L8 12 Z" stroke="#3A7CA5" stroke-width="1.5" opacity=".3" fill="none"/><polyline points="18,24 22,28 30,18" stroke="#3A7CA5" stroke-width="1.5" opacity=".45" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="icon-name">TRUST</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="24" y1="8" x2="24" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="10" y1="36" x2="24" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="38" y1="36" x2="24" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><circle cx="24" cy="8" r="4" stroke="#3A7CA5" stroke-width="1.5" opacity=".25"/><circle cx="10" cy="36" r="4" stroke="#3A7CA5" stroke-width="1.5" opacity=".25"/><circle cx="38" cy="36" r="4" stroke="#3A7CA5" stroke-width="1.5" opacity=".25"/><circle cx="24" cy="24" r="5" stroke="#3A7CA5" stroke-width="1.5" opacity=".45"/></svg></div><div class="icon-name">NETWORK</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="6" y1="38" x2="42" y2="38" stroke="#3A7CA5" stroke-width="1.5" opacity=".4"/><line x1="10" y1="30" x2="38" y2="30" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><line x1="14" y1="22" x2="34" y2="22" stroke="#3A7CA5" stroke-width="1.5" opacity=".22"/><line x1="18" y1="14" x2="30" y2="14" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="6" y1="38" x2="10" y2="30" stroke="#3A7CA5" stroke-width="1.5" opacity=".08"/><line x1="42" y1="38" x2="38" y2="30" stroke="#3A7CA5" stroke-width="1.5" opacity=".08"/><line x1="10" y1="30" x2="14" y2="22" stroke="#3A7CA5" stroke-width="1.5" opacity=".06"/><line x1="38" y1="30" x2="34" y2="22" stroke="#3A7CA5" stroke-width="1.5" opacity=".06"/><line x1="14" y1="22" x2="18" y2="14" stroke="#3A7CA5" stroke-width="1.5" opacity=".05"/><line x1="34" y1="22" x2="30" y2="14" stroke="#3A7CA5" stroke-width="1.5" opacity=".05"/><circle cx="24" cy="8" r="2.5" stroke="#3A7CA5" stroke-width="1.5" opacity=".45"/></svg></div><div class="icon-name">HIERARCHY</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="14" height="14" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><rect x="28" y="6" width="14" height="14" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><rect x="6" y="28" width="14" height="14" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><rect x="28" y="28" width="14" height="14" rx="1" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="20" y1="13" x2="28" y2="13" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="20" y1="35" x2="28" y2="35" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="13" y1="20" x2="13" y2="28" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="35" y1="20" x2="35" y2="28" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><circle cx="24" cy="24" r="3" stroke="#3A7CA5" stroke-width="1.5" opacity=".4"/></svg></div><div class="icon-name">SYSTEMS</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><line x1="8" y1="12" x2="40" y2="12" stroke="#3A7CA5" stroke-width="1.5" opacity=".15"/><line x1="8" y1="20" x2="40" y2="20" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="8" y1="28" x2="40" y2="28" stroke="#3A7CA5" stroke-width="1.5" opacity=".3"/><line x1="8" y1="36" x2="40" y2="36" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="8" y1="10" x2="8" y2="38" stroke="#3A7CA5" stroke-width="1.5" opacity=".12"/><circle cx="8" cy="12" r="2" fill="#3A7CA5" opacity=".15"/><circle cx="8" cy="20" r="2" fill="#3A7CA5" opacity=".2"/><circle cx="8" cy="28" r="2" fill="#3A7CA5" opacity=".35"/><circle cx="8" cy="36" r="2" fill="#3A7CA5" opacity=".2"/></svg></div><div class="icon-name">ALIGNMENT</div></div>
+        <div class="icon-cell"><div class="icon-svg"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="24" y1="8" x2="24" y2="16" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="24" y1="32" x2="24" y2="40" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="8" y1="24" x2="16" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="32" y1="24" x2="40" y2="24" stroke="#3A7CA5" stroke-width="1.5" opacity=".2"/><line x1="24" y1="24" x2="32" y2="16" stroke="#3A7CA5" stroke-width="2" opacity=".35"/><line x1="24" y1="24" x2="24" y2="16" stroke="#3A7CA5" stroke-width="1.5" opacity=".25"/><circle cx="24" cy="24" r="2.5" fill="#3A7CA5" opacity=".45"/><circle cx="32" cy="16" r="2" fill="#3A7CA5" opacity=".3"/></svg></div><div class="icon-name">CALIBRATE</div></div>
+    </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- DATA -->
+<div class="sh pad reveal"><div class="sh-num">04 · DATA DIRECTION</div><div class="sh-title">Data Identity</div><div class="sh-desc">The brand will present complex MedTech data to TTOs and inventors. Charts follow the same system: copper as the single accent, structural grid lines behind every chart, and the same restrained approach applied to every number on screen.</div></div>
+<div class="data pad">
+    <div class="data-grid">
+        <!-- PANEL 1 — BAR CHART -->
+        <div class="data-panel reveal">
+            <div class="dp-amb dp-amb-1"></div><div class="dp-amb dp-amb-2"></div>
+            <div class="dp-corner dp-corner-tl"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#3A7CA5" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-corner dp-corner-br"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#3A7CA5" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-head">
+                <div><div class="dp-idx">01</div><div class="dp-title">PIPELINE VELOCITY</div></div>
+                <div class="dp-kpi"><div class="dp-kpi-val">88</div><div class="dp-kpi-lbl">PEAK SCORE</div></div>
+            </div>
+            <div class="dp-chart">
+                <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="barG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3A7CA5" stop-opacity=".55"/><stop offset="100%" stop-color="#3A7CA5" stop-opacity=".08"/></linearGradient>
+                        <linearGradient id="barG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3A7CA5" stop-opacity=".8"/><stop offset="100%" stop-color="#3A7CA5" stop-opacity=".15"/></linearGradient>
+                        <filter id="barGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+                    <line x1="30" y1="10" x2="395" y2="10" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="57" x2="395" y2="57" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="104" x2="395" y2="104" stroke="#3A7CA5" stroke-width=".5" opacity=".05"/>
+                    <line x1="30" y1="151" x2="395" y2="151" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                    <text x="22" y="14" fill="#3A7CA5" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">100</text>
+                    <text x="22" y="60" fill="#3A7CA5" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">75</text>
+                    <text x="22" y="108" fill="#3A7CA5" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">50</text>
+                    <text x="22" y="155" fill="#3A7CA5" opacity=".12" font-size="7" text-anchor="end" font-family="Outfit">25</text>
+                    <line x1="30" y1="8" x2="30" y2="192" stroke="#3A7CA5" stroke-width=".5" opacity=".06"/>
+                    <line x1="30" y1="192" x2="395" y2="192" stroke="#3A7CA5" stroke-width=".5" opacity=".08"/>
+                    <rect x="40" y="124" width="26" height="68" rx="1" fill="url(#barG1)" opacity=".55"/>
+                    <rect x="76" y="97" width="26" height="95" rx="1" fill="url(#barG1)" opacity=".65"/>
+                    <rect x="112" y="49" width="26" height="143" rx="1" fill="url(#barG1)" opacity=".8"/>
+                    <rect x="148" y="107" width="26" height="85" rx="1" fill="url(#barG1)" opacity=".6"/>
+                    <rect x="184" y="72" width="26" height="120" rx="1" fill="url(#barG1)" opacity=".72"/>
+                    <rect x="220" y="135" width="26" height="57" rx="1" fill="url(#barG1)" opacity=".5"/>
+                    <rect x="256" y="25" width="26" height="167" rx="1" fill="url(#barG2)" opacity=".9" filter="url(#barGlow)"/>
+                    <rect x="292" y="92" width="26" height="100" rx="1" fill="url(#barG1)" opacity=".65"/>
+                    <rect x="328" y="58" width="26" height="134" rx="1" fill="url(#barG1)" opacity=".75"/>
+                    <rect x="364" y="114" width="26" height="78" rx="1" fill="url(#barG1)" opacity=".55"/>
+                    <circle cx="269" cy="20" r="2" fill="#3A7CA5" opacity=".5"/>
+                    <line x1="269" y1="22" x2="269" y2="25" stroke="#3A7CA5" stroke-width=".75" opacity=".3"/>
+                    <text x="53" y="119" fill="#3A7CA5" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">35</text>
+                    <text x="89" y="92" fill="#3A7CA5" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">52</text>
+                    <text x="125" y="44" fill="#3A7CA5" opacity=".25" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">78</text>
+                    <text x="161" y="102" fill="#3A7CA5" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">45</text>
+                    <text x="197" y="67" fill="#3A7CA5" opacity=".22" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">65</text>
+                    <text x="233" y="130" fill="#3A7CA5" opacity=".18" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">30</text>
+                    <text x="269" y="16" fill="#3A7CA5" opacity=".45" font-size="8" text-anchor="middle" font-family="Outfit" font-weight="700">88</text>
+                    <text x="305" y="87" fill="#3A7CA5" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">55</text>
+                    <text x="341" y="53" fill="#3A7CA5" opacity=".22" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">72</text>
+                    <text x="377" y="109" fill="#3A7CA5" opacity=".2" font-size="7" text-anchor="middle" font-family="Outfit" font-weight="700">42</text>
+                </svg>
+            </div>
+            <div class="dp-base"></div>
+            <div class="dp-labels"><span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span></div>
+        </div>
+
+        <!-- PANEL 2 — LINE / AREA CHART -->
+        <div class="data-panel reveal rd1">
+            <div class="dp-amb dp-amb-1"></div><div class="dp-amb dp-amb-2"></div>
+            <div class="dp-corner dp-corner-tl"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#3A7CA5" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-corner dp-corner-br"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#3A7CA5" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-head">
+                <div><div class="dp-idx">02</div><div class="dp-title">GROWTH TRAJECTORY</div></div>
+                <div class="dp-kpi"><div class="dp-kpi-val">+147%</div><div class="dp-kpi-lbl">YOY GROWTH</div></div>
+            </div>
+            <div class="dp-chart">
+                <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3A7CA5" stop-opacity=".18"/><stop offset="60%" stop-color="#3A7CA5" stop-opacity=".04"/><stop offset="100%" stop-color="#3A7CA5" stop-opacity="0"/></linearGradient>
+                        <linearGradient id="areaG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3A7CA5" stop-opacity=".08"/><stop offset="100%" stop-color="#3A7CA5" stop-opacity="0"/></linearGradient>
+                        <linearGradient id="lineG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A7CA5" stop-opacity=".15"/><stop offset="100%" stop-color="#3A7CA5" stop-opacity=".65"/></linearGradient>
+                        <filter id="dotGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+                    <line x1="30" y1="10" x2="395" y2="10" stroke="#3A7CA5" stroke-width=".5" opacity=".03"/>
+                    <line x1="30" y1="50" x2="395" y2="50" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="90" x2="395" y2="90" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="130" x2="395" y2="130" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                    <line x1="30" y1="170" x2="395" y2="170" stroke="#3A7CA5" stroke-width=".5" opacity=".03"/>
+                    <line x1="90" y1="10" x2="90" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".02"/>
+                    <line x1="152" y1="10" x2="152" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".02"/>
+                    <line x1="213" y1="10" x2="213" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".02"/>
+                    <line x1="275" y1="10" x2="275" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".02"/>
+                    <line x1="337" y1="10" x2="337" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".02"/>
+                    <line x1="30" y1="8" x2="30" y2="192" stroke="#3A7CA5" stroke-width=".5" opacity=".06"/>
+                    <line x1="30" y1="190" x2="395" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".08"/>
+                    <text x="22" y="14" fill="#3A7CA5" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">200</text>
+                    <text x="22" y="54" fill="#3A7CA5" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">150</text>
+                    <text x="22" y="94" fill="#3A7CA5" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">100</text>
+                    <text x="22" y="134" fill="#3A7CA5" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">50</text>
+                    <text x="22" y="174" fill="#3A7CA5" opacity=".1" font-size="7" text-anchor="end" font-family="Outfit">0</text>
+                    <polygon points="30,165 90,155 152,148 213,132 275,118 337,98 395,88 395,190 30,190" fill="url(#areaG2)"/>
+                    <polyline points="30,165 90,155 152,148 213,132 275,118 337,98 395,88" stroke="#3A7CA5" stroke-width="1" fill="none" opacity=".15" stroke-dasharray="4,4"/>
+                    <polygon points="30,160 90,142 152,135 213,105 275,80 337,48 395,30 395,190 30,190" fill="url(#areaG)"/>
+                    <polyline points="30,160 90,142 152,135 213,105 275,80 337,48 395,30" stroke="url(#lineG)" stroke-width="1.5" fill="none"/>
+                    <circle cx="90" cy="142" r="2" fill="#3A7CA5" opacity=".25"/>
+                    <circle cx="152" cy="135" r="2" fill="#3A7CA5" opacity=".3"/>
+                    <circle cx="213" cy="105" r="2.5" fill="#3A7CA5" opacity=".35"/>
+                    <circle cx="275" cy="80" r="2.5" fill="#3A7CA5" opacity=".4"/>
+                    <circle cx="337" cy="48" r="3" fill="#3A7CA5" opacity=".45"/>
+                    <circle cx="395" cy="30" r="4" fill="#3A7CA5" opacity=".55" filter="url(#dotGlow)"/>
+                    <circle cx="395" cy="30" r="8" fill="none" stroke="#3A7CA5" stroke-width="1.5" opacity=".12">
+                        <animate attributeName="r" values="8;14;8" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values=".12;.04;.12" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="395" y1="30" x2="395" y2="190" stroke="#3A7CA5" stroke-width=".5" opacity=".06" stroke-dasharray="2,3"/>
+                </svg>
+            </div>
+            <div class="dp-base"></div>
+            <div class="dp-labels"><span>Q1 '24</span><span>Q2 '24</span><span>Q3 '24</span><span>Q4 '24</span><span>Q1 '25</span><span>Q2 '25</span><span>Q3 '25</span></div>
+        </div>
+
+        <!-- PANEL 3 — MULTI-SEGMENT RING -->
+        <div class="data-panel reveal rd2">
+            <div class="dp-amb dp-amb-1"></div><div class="dp-amb dp-amb-2"></div>
+            <div class="dp-corner dp-corner-tl"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#3A7CA5" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-corner dp-corner-br"><svg viewBox="0 0 12 12" fill="none"><path d="M0 12V0h12" stroke="#3A7CA5" stroke-width=".75" opacity=".15"/></svg></div>
+            <div class="dp-head">
+                <div><div class="dp-idx">03</div><div class="dp-title">PORTFOLIO DISTRIBUTION</div></div>
+                <div class="dp-kpi"><div class="dp-kpi-val">4</div><div class="dp-kpi-lbl">SEGMENTS</div></div>
+            </div>
+            <div class="dp-donut-layout">
+                <div class="dp-ring">
+                    <svg viewBox="0 0 200 200">
+                        <defs><filter id="ringGlow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                        <circle cx="100" cy="100" r="96" fill="none" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#3A7CA5" stroke-width="14" opacity=".06" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="62" fill="none" stroke="#3A7CA5" stroke-width=".5" opacity=".06"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#3A7CA5" stroke-width="14" opacity=".5" stroke-dasharray="205.84 284" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 100 100)" filter="url(#ringGlow)"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#3A7CA5" stroke-width="14" opacity=".3" stroke-dasharray="137.23 352.6" stroke-dashoffset="-211.84" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#3A7CA5" stroke-width="14" opacity=".18" stroke-dasharray="88.22 401.6" stroke-dashoffset="-355.07" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="#3A7CA5" stroke-width="14" opacity=".1" stroke-dasharray="58.81 430.98" stroke-dashoffset="-449.29" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                        <circle cx="100" cy="100" r="2.5" fill="#3A7CA5" opacity=".3"/>
+                        <line x1="100" y1="14" x2="100" y2="20" stroke="#3A7CA5" stroke-width=".75" opacity=".12"/>
+                        <line x1="186" y1="100" x2="180" y2="100" stroke="#3A7CA5" stroke-width=".75" opacity=".12"/>
+                        <line x1="100" y1="186" x2="100" y2="180" stroke="#3A7CA5" stroke-width=".75" opacity=".12"/>
+                        <line x1="14" y1="100" x2="20" y2="100" stroke="#3A7CA5" stroke-width=".75" opacity=".12"/>
+                    </svg>
+                    <div class="dp-ring-center">
+                        <div class="dp-ring-num">68%</div>
+                        <span class="dp-ring-lbl">TRIAGE™ SCORE</span>
+                    </div>
+                </div>
+                <div class="dp-legend">
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.5"></div><div class="dp-leg-txt">Regulatory</div><div class="dp-leg-val">42%</div></div>
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.3"></div><div class="dp-leg-txt">Clinical</div><div class="dp-leg-val">28%</div></div>
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.18"></div><div class="dp-leg-txt">Market Access</div><div class="dp-leg-val">18%</div></div>
+                    <div class="dp-leg"><div class="dp-leg-bar" style="opacity:.1"></div><div class="dp-leg-txt">Capital</div><div class="dp-leg-val">12%</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+    <div class="foot-credit">DESIGNED & DEVELOPED BY</div>
+    <div class="foot-logo">
+        <img src="https://fiapex.com/assets/img/logo/logo.svg" alt="Fiapex" onerror="this.style.display='none';this.parentElement.querySelector('.foot-logo-text').style.display='block'">
+        <div class="foot-logo-text">FIAPEX</div>
+    </div>
+</div>
+
+<script>
+// Progress bar + header scroll effect
+const header=document.getElementById('siteHeader');
+window.addEventListener('scroll',()=>{
+    const h=document.documentElement.scrollHeight-window.innerHeight;
+    document.getElementById('prog').style.width=(window.scrollY/h*100)+'%';
+    if(window.scrollY>40){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}
+});
+// Mobile nav toggle
+document.getElementById('navToggle').addEventListener('click',function(){
+    document.getElementById('siteNav').classList.toggle('open');
+    this.classList.toggle('active');
+});
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.data-panel,.vc,.strat-card,.icon-cell').forEach(el=>{
+    el.addEventListener('mousemove',e=>{
+        const r=el.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        el.style.transform=`perspective(600px) rotateY(${x*4}deg) rotateX(${-y*4}deg) scale(1.01)`;
+    });
+    el.addEventListener('mouseleave',()=>{el.style.transform='';});
+});
+</script>
+
+
+
+<script>
+document.querySelectorAll('.vc-dl').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var vc = this.closest('.vc');
+    var name = vc.querySelector('.vc-lbl').textContent.trim();
+    var svg = vc.querySelector(':scope > svg');
+    if(svg){
+      var clone = svg.cloneNode(true);
+      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      var bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      bg.setAttribute('width','100%');bg.setAttribute('height','100%');bg.setAttribute('fill','#0F131E');
+      clone.insertBefore(bg, clone.firstChild);
+      var data = new XMLSerializer().serializeToString(clone);
+      var blob = new Blob([data],{type:'image/svg+xml'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.download = name + '.svg';
+      a.href = url;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      var canvas = document.createElement('canvas');
+      var rect = vc.getBoundingClientRect();
+      var scale = 2;
+      canvas.width = rect.width * scale;
+      canvas.height = rect.height * scale;
+      var ctx = canvas.getContext('2d');
+      var svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" style="width:'+rect.width+'px;height:'+rect.height+'px;transform:scale('+scale+');transform-origin:0 0">'+vc.outerHTML+'</div></foreignObject></svg>';
+      var img = new Image();
+      var svgBlob = new Blob([svgData],{type:'image/svg+xml;charset=utf-8'});
+      var urlImg = URL.createObjectURL(svgBlob);
+      img.onload = function(){
+        ctx.drawImage(img,0,0);
+        canvas.toBlob(function(blob){
+          var a = document.createElement('a');
+          a.download = name + '.png';
+          a.href = URL.createObjectURL(blob);
+          a.click();
+          URL.revokeObjectURL(a.href);
+        },'image/png');
+        URL.revokeObjectURL(urlImg);
+      };
+      img.onerror = function(){
+        URL.revokeObjectURL(urlImg);
+        var w = window.open('','_blank','width=600,height=400');
+        w.document.write('<html><head><title>'+name+'</title><style>body{margin:0;background:#0F131E;display:flex;align-items:center;justify-content:center;min-height:100vh}</style></head><body>');
+        w.document.write('<p style="color:#3A7CA5;font-family:sans-serif;text-align:center;padding:40px">Right-click the page and select "Save as" or use <strong>Ctrl+Shift+S</strong> to screenshot.<br><br>Composition: <strong>'+name+'</strong></p>');
+        w.document.write('</body></html>');
+        w.document.close();
+      };
+      img.src = urlImg;
+    }
+  });
+});
+</script>
+
+<script>
+// ═══ Theme Toggle (with SVG adjustments) ═══
+(function(){
+    var toggle = document.getElementById('themeToggle');
+    var html = document.documentElement;
+    var saved = localStorage.getItem('siaxen-theme');
+    var DARK = '#3A7CA5', LIGHT = '#1A5575';
+
+    var palettes = {
+        dark: [
+            {n:'Deep Atlantic', h:'#070912'},
+            {n:'Harbor', h:'#0F131E'},
+            {n:'Atlantic', h:'#3A7CA5'},
+            {n:'Silver', h:'#E8ECF2'}
+        ],
+        light: [
+            {n:'Canvas', h:'#F5F7FA'},
+            {n:'White', h:'#FFFFFF'},
+            {n:'Atlantic', h:'#2B6B96'},
+            {n:'Charcoal', h:'#1A2030'}
+        ]
+    };
+
+    function updatePalette(theme) {
+        var p = palettes[theme];
+        document.querySelectorAll('.hp').forEach(function(card, i) {
+            if(p[i]) {
+                var nm = card.querySelector('.hp-name');
+                var hx = card.querySelector('.hp-hex');
+                if(nm) nm.textContent = p[i].n;
+                if(hx) hx.textContent = p[i].h;
+            }
+        });
+    }
+
+    function adjustSVGs(theme) {
+        var isLight = theme === 'light';
+        var svgs = document.querySelectorAll('.vc > svg, .icon-svg svg, .dp-chart svg, .dp-corner svg, .dp-ring svg');
+
+        svgs.forEach(function(svg) {
+            // 1. Boost/restore opacity attributes
+            svg.querySelectorAll('[opacity]').forEach(function(el) {
+                if(!el.hasAttribute('data-dop')) {
+                    el.setAttribute('data-dop', el.getAttribute('opacity'));
+                }
+                if(isLight) {
+                    var o = parseFloat(el.getAttribute('data-dop'));
+                    el.setAttribute('opacity', Math.min(o * 2.2 + 0.06, 0.85).toFixed(3));
+                } else {
+                    el.setAttribute('opacity', el.getAttribute('data-dop'));
+                }
+            });
+
+            // 2. Boost/restore stop-opacity (gradients)
+            svg.querySelectorAll('[stop-opacity]').forEach(function(el) {
+                if(!el.hasAttribute('data-dsop')) {
+                    el.setAttribute('data-dsop', el.getAttribute('stop-opacity'));
+                }
+                if(isLight) {
+                    var o = parseFloat(el.getAttribute('data-dsop'));
+                    el.setAttribute('stop-opacity', Math.min(o * 2 + 0.1, 0.92).toFixed(3));
+                } else {
+                    el.setAttribute('stop-opacity', el.getAttribute('data-dsop'));
+                }
+            });
+
+            // 3. Darken/restore colors (#3A7CA5 → #1A5575)
+            svg.querySelectorAll('*').forEach(function(el) {
+                ['stroke','fill','stop-color'].forEach(function(attr) {
+                    var v = el.getAttribute(attr);
+                    if(v === DARK || v === LIGHT) {
+                        el.setAttribute(attr, isLight ? LIGHT : DARK);
+                    }
+                });
+            });
+
+            // 4. Handle gradient fill references — update text fill colors too
+            svg.querySelectorAll('text[fill="'+DARK+'"], text[fill="'+LIGHT+'"]').forEach(function(el) {
+                el.setAttribute('fill', isLight ? LIGHT : DARK);
+            });
+        });
+    }
+
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('siaxen-theme', theme);
+        updatePalette(theme);
+        adjustSVGs(theme);
+    }
+
+    // Initialize
+    if(saved) setTheme(saved);
+
+    toggle.addEventListener('click', function(){
+        var isLight = html.getAttribute('data-theme') === 'light';
+        setTheme(isLight ? 'dark' : 'light');
+    });
+})();
+</script>
+</body>
+</html>
