@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siaxen · Color System</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root{--base:#070912;--surf:#0F131E;--acc:#3A7CA5;--tx:#E8ECF2}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Serif Display',serif;letter-spacing:.02em;background:linear-gradient(180deg,#090B14 0%,var(--base) 25%,#0A0C16 50%,var(--base) 75%,#090B14 100%);background-attachment:fixed;color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acc);color:var(--base)}
+.pad{padding-left:clamp(16px,4vw,56px);padding-right:clamp(16px,4vw,56px)}
+
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--acc) 1.5px,transparent 1px),linear-gradient(90deg,var(--acc) 1.5px,transparent 1.5px);background-size:80px 80px;opacity:.06}
+.bg-vig{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 30%,var(--base) 80%)}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px 128px}
+body>:not(.bg-grid):not(.bg-vig):not(.bg-noise):not(.progress):not(.toast){position:relative;z-index:1}
+
+.dv{height:1.5px;background:linear-gradient(90deg,transparent,var(--acc),transparent);opacity:.1}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);z-index:100;width:0;transition:width .05s}
+
+/* ── HEADER ── */
+.site-header{position:sticky;top:0;z-index:99;display:flex;align-items:center;padding:22px clamp(24px,4vw,56px);background:var(--base);gap:44px}
+.site-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.site-nav{display:flex;gap:34px;align-items:center;flex:1}
+.site-nav a{font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;letter-spacing:.2px;color:var(--tx);opacity:.4;text-decoration:none;transition:all .3s}
+.site-nav a:hover{opacity:.7}
+.site-nav a.active{opacity:.75}
+.site-nav-cta{display:flex;align-items:center;gap:14px;margin-left:auto;flex-shrink:0}
+.nav-cta{padding:10px 24px;background:var(--acc);color:var(--base);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;letter-spacing:.3px;border:none;opacity:.9;transition:all .3s;text-decoration:none;border-radius:0}
+.nav-cta:hover{opacity:1;transform:translateY(-1px)}
+.nav-signin{padding:10px 20px;border:1px solid rgba(58,124,165,.3);color:var(--acc);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;letter-spacing:.3px;text-decoration:none;opacity:.55;transition:all .3s;border-radius:0}
+.nav-signin:hover{opacity:.8;border-color:rgba(58,124,165,.5)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.nav-toggle span{display:block;width:20px;height:1.5px;background:var(--acc);margin:4px 0;opacity:.5}
+@media(max-width:768px){
+  .site-nav{position:fixed;top:66px;right:0;bottom:0;width:240px;background:rgba(9,11,18,.98);backdrop-filter:blur(16px);flex-direction:column;align-items:flex-start;padding:24px 20px;gap:0;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);border-left:1px solid rgba(58,124,165,.06);z-index:100}
+  .site-nav.open{transform:translateX(0)}
+  .site-nav a{padding:12px 0;width:100%;border-bottom:1px solid rgba(58,124,165,.04);font-size:10px;letter-spacing:2px}
+  .nav-toggle{display:block}
+}
+
+/* ── SECTION HEADER ── */
+.sh{padding-top:clamp(52px,7vw,80px);padding-bottom:clamp(16px,2.5vw,24px)}
+.sh-num{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;color:var(--acc)}
+.sh-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);font-weight:400;color:var(--tx);opacity:.8;margin-top:4px}
+.sh-desc{font-family:'Outfit',sans-serif;font-size:clamp(10px,1.1vw,12px);font-weight:400;color:var(--tx);opacity:.18;line-height:1.8;margin-top:8px;max-width:540px}
+
+/* ── REVEAL ── */
+.reveal{opacity:1;transform:none}
+
+/* ── HERO ── */
+.hero{padding:clamp(48px,7vw,88px) clamp(16px,4vw,56px) clamp(24px,4vw,48px)}
+.hero-eyebrow{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;color:var(--acc);opacity:.5;margin-bottom:20px}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(40px,6.5vw,80px);font-weight:400;letter-spacing:-.5px;line-height:.95}
+.hero-title em{font-style:normal;color:var(--acc)}
+.hero-desc{font-family:'Outfit',sans-serif;font-size:clamp(11px,1.2vw,13px);color:var(--tx);opacity:.22;line-height:1.9;max-width:500px;margin-top:20px}
+
+.color-spectrum{display:flex;height:5px;margin-top:40px;overflow:hidden}
+.cs-seg{flex:1}
+
+/* ── SWATCH ── */
+.sw-grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.sw-grid-10{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.sw-grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.sw{cursor:pointer;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.sw:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.sw-color{height:clamp(80px,10vw,130px);position:relative}
+.sw-core-tag{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-family:'Outfit',sans-serif;font-size:6px;font-weight:700;letter-spacing:2.5px;color:rgba(7,9,18,.5);white-space:nowrap;background:rgba(58,124,165,.4);padding:3px 7px}
+.sw-body{background:var(--surf);padding:clamp(10px,1.2vw,14px);border-top:1px solid rgba(58,124,165,.05)}
+.sw-body-acc{border-top:2px solid #3A7CA5}
+.sw-name{font-family:'DM Serif Display',serif;font-size:clamp(9px,1vw,12px);color:var(--tx);opacity:.55;margin-bottom:3px}
+.sw-hex{font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--acc);opacity:.5}
+.sw-var{font-family:'Outfit',sans-serif;font-size:7.5px;font-weight:500;color:var(--tx);opacity:.12;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sw-hint{display:none}
+
+/* ── SEMANTIC ── */
+.sem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.sem-card{background:var(--surf);padding:clamp(20px,3vw,36px);cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1),background .3s;position:relative;overflow:hidden}
+.sem-card:hover{transform:translateY(-3px);background:rgba(18,21,30,.95)}
+.sem-top{height:2.5px;position:absolute;top:0;left:0;right:0}
+.sem-dot{width:8px;height:8px;border-radius:50%;margin-bottom:20px}
+.sem-nm{font-family:'DM Serif Display',serif;font-size:18px;color:var(--tx);opacity:.65;margin-bottom:4px}
+.sem-role{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.3;margin-bottom:12px}
+.sem-desc{font-family:'Outfit',sans-serif;font-size:10px;color:var(--tx);opacity:.18;line-height:1.8}
+.sem-hx{font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;margin-top:16px;opacity:.5}
+
+/* ── DATA SWATCHES ── */
+.ds-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.ds{cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.ds:hover{transform:translateY(-6px)}
+.ds-bar{height:clamp(90px,12vw,140px);position:relative;overflow:hidden}
+.ds-glow{position:absolute;bottom:-10px;left:-10px;right:-10px;height:80%;border-radius:50%;opacity:0;transition:opacity .4s;filter:blur(20px)}
+.ds:hover .ds-glow{opacity:.35}
+.ds-body{background:var(--surf);padding:12px;border-top:1px solid rgba(58,124,165,.05)}
+.ds-idx{font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.3;margin-bottom:3px}
+.ds-nm{font-family:'DM Serif Display',serif;font-size:11px;color:var(--tx);opacity:.5;margin-bottom:2px}
+.ds-hx{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:1px;opacity:.45}
+.ds-ux{font-family:'Outfit',sans-serif;font-size:8px;color:var(--tx);opacity:.16;margin-top:5px;line-height:1.5}
+
+/* ── DATA DEMO CHART ── */
+.dd-wrap{background:var(--surf);padding:clamp(24px,3.5vw,44px);margin-top:4px;position:relative;overflow:hidden}
+.dd-wrap::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(58,124,165,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(58,124,165,.02) 1px,transparent 1px);background-size:28px 28px}
+.dd-topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;position:relative;z-index:2;flex-wrap:wrap;gap:14px}
+.dd-lbl{font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.4}
+.dd-legend{display:flex;flex-wrap:wrap;gap:14px}
+.dd-li{display:flex;align-items:center;gap:6px}
+.dd-li-line{width:14px;height:2px;border-radius:1px;flex-shrink:0}
+.dd-li-txt{font-family:'Outfit',sans-serif;font-size:8px;font-weight:500;color:var(--tx);opacity:.22}
+
+/* ── OPACITY REFERENCE ── */
+.op-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.op-cell{background:var(--surf);padding:clamp(14px,2vw,22px) 6px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:transform .3s;cursor:default}
+.op-cell:hover{transform:translateY(-2px)}
+.op-ring{border-radius:50%;flex-shrink:0}
+.op-pct{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:1px;color:var(--acc);opacity:.4;text-align:center}
+.op-rgba{font-family:'Outfit',sans-serif;font-size:6.5px;color:var(--tx);opacity:.1;text-align:center;line-height:1.5}
+
+/* ── TOKEN BLOCK ── */
+.token-wrap{background:var(--surf);position:relative;overflow:hidden}
+.token-wrap::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(58,124,165,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(58,124,165,.02) 1px,transparent 1px);background-size:28px 28px}
+.tw-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(18px,2.5vw,28px) clamp(20px,3vw,40px);border-bottom:1px solid rgba(58,124,165,.06);position:relative;z-index:2}
+.tw-tag{font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.4}
+.tw-copy{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;color:var(--acc);opacity:.35;background:none;border:1px solid rgba(58,124,165,.2);padding:7px 14px;cursor:pointer;transition:all .3s}
+.tw-copy:hover{opacity:.6;border-color:rgba(58,124,165,.4)}
+.token-code{padding:clamp(20px,3vw,40px);overflow-x:auto;position:relative;z-index:2}
+.token-code code{font-family:'Courier New',monospace;font-size:11px;color:var(--tx);line-height:2.1;display:block;white-space:pre}
+.tc-comment{color:var(--acc);opacity:.25}
+.tc-prop{color:#5AB2CC;opacity:.75}
+.tc-val{color:var(--tx);opacity:.38}
+.tc-acc{color:var(--acc);opacity:.8}
+
+/* ── FOOTER ── */
+.foot{padding:clamp(44px,6vw,72px) clamp(16px,4vw,56px);border-top:1px solid rgba(58,124,165,.08);display:flex;flex-direction:column;align-items:center;gap:16px}
+.foot-credit{font-family:'Outfit',sans-serif;font-size:8px;font-weight:500;letter-spacing:2px;color:var(--tx);opacity:.08}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(16px);z-index:999;background:var(--surf);border:1px solid rgba(58,124,165,.25);padding:12px 28px;font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;color:var(--acc);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);pointer-events:none;white-space:nowrap;backdrop-filter:blur(12px)}
+.toast.show{opacity:.95;transform:translateX(-50%) translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){.sw-grid-10{grid-template-columns:repeat(5,1fr)}.ds-grid{grid-template-columns:repeat(4,1fr)}.op-grid{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:800px){.sw-grid-6{grid-template-columns:repeat(3,1fr)}.sem-grid{grid-template-columns:repeat(2,1fr)}.ds-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.sw-grid-6{grid-template-columns:repeat(2,1fr)}.sw-grid-10{grid-template-columns:repeat(5,1fr)}.sw-grid-5{grid-template-columns:repeat(3,1fr)}.sem-grid{grid-template-columns:1fr 1fr}.ds-grid{grid-template-columns:repeat(4,1fr)}.op-grid{grid-template-columns:repeat(5,1fr)}.sw-var{display:none}.ds-ux{display:none}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<div class="bg-grid"></div>
+<div class="bg-vig"></div>
+<div class="bg-noise"></div>
+
+<!-- ══ 01 CORE — DARK ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">01 · CORE PALETTE</div>
+  <div class="sh-title">Dark Theme</div>
+</div>
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="sw-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+    <div class="sw reveal" onclick="copyColor('#070912','Deep Atlantic')">
+      <div class="sw-color" style="background:#070912;height:clamp(100px,14vw,160px)"></div>
+      <div class="sw-body"><div class="sw-name">Deep Atlantic</div><div class="sw-hex">#070912</div><div class="sw-var">--base</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd1" onclick="copyColor('#0F131E','Harbor')">
+      <div class="sw-color" style="background:#0F131E;height:clamp(100px,14vw,160px)"></div>
+      <div class="sw-body"><div class="sw-name">Harbor</div><div class="sw-hex">#0F131E</div><div class="sw-var">--surf</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd2" onclick="copyColor('#3A7CA5','Atlantic')">
+      <div class="sw-color" style="background:#3A7CA5;height:clamp(100px,14vw,160px)"><div class="sw-core-tag">ACCENT</div></div>
+      <div class="sw-body sw-body-acc"><div class="sw-name" style="opacity:.8">Atlantic</div><div class="sw-hex" style="opacity:.9">#3A7CA5</div><div class="sw-var">--acc</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd3" onclick="copyColor('#E8ECF2','Silver')">
+      <div class="sw-color" style="background:#E8ECF2;height:clamp(100px,14vw,160px)"></div>
+      <div class="sw-body"><div class="sw-name" style="color:#E8ECF2">Silver</div><div class="sw-hex">#E8ECF2</div><div class="sw-var">--tx</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 02 CORE — LIGHT ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">02 · CORE PALETTE</div>
+  <div class="sh-title">Light Theme</div>
+</div>
+<div class="pad" style="padding-bottom:4px">
+  <!-- Same 4 core (accent stays #3A7CA5) -->
+  <div class="sw-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+    <div class="sw reveal" onclick="copyColor('#FFFFFF','White')">
+      <div class="sw-color" style="background:#FFFFFF;height:clamp(100px,14vw,160px);border:1px solid rgba(0,0,0,.06)"></div>
+      <div class="sw-body"><div class="sw-name" style="color:#1A2030">White</div><div class="sw-hex" style="color:#3A7CA5">#FFFFFF</div><div class="sw-var">--base</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd1" onclick="copyColor('#F0F4F8','Cloud')">
+      <div class="sw-color" style="background:#F0F4F8;height:clamp(100px,14vw,160px);border:1px solid rgba(0,0,0,.06)"></div>
+      <div class="sw-body"><div class="sw-name" style="color:#1A2030">Cloud</div><div class="sw-hex" style="color:#3A7CA5">#F0F4F8</div><div class="sw-var">--surf</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd2" onclick="copyColor('#3A7CA5','Atlantic')">
+      <div class="sw-color" style="background:#3A7CA5;height:clamp(100px,14vw,160px)"><div class="sw-core-tag">ACCENT · SAME</div></div>
+      <div class="sw-body sw-body-acc"><div class="sw-name" style="opacity:.8">Atlantic</div><div class="sw-hex" style="opacity:.9">#3A7CA5</div><div class="sw-var">--acc</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd3" onclick="copyColor('#1A2030','Charcoal')">
+      <div class="sw-color" style="background:#1A2030;height:clamp(100px,14vw,160px)"></div>
+      <div class="sw-body"><div class="sw-name">Charcoal</div><div class="sw-hex">#1A2030</div><div class="sw-var">--tx</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+  </div>
+</div>
+<!-- Light-only additions -->
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div style="font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:3px;color:var(--acc);opacity:.3;margin-bottom:10px">LIGHT-ONLY ADDITIONS</div>
+  <div class="sw-grid-5" style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px">
+    <div class="sw reveal" onclick="copyColor('#4A5568','Iron')">
+      <div class="sw-color" style="background:#4A5568;height:clamp(60px,8vw,90px)"></div>
+      <div class="sw-body"><div class="sw-name">Iron</div><div class="sw-hex">#4A5568</div><div class="sw-var">--tx-sub</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd1" onclick="copyColor('#8892A0','Fog')">
+      <div class="sw-color" style="background:#8892A0;height:clamp(60px,8vw,90px)"></div>
+      <div class="sw-body"><div class="sw-name">Fog</div><div class="sw-hex">#8892A0</div><div class="sw-var">--tx-mute</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd2" onclick="copyColor('#EDF0F5','Frost')">
+      <div class="sw-color" style="background:#EDF0F5;height:clamp(60px,8vw,90px);border:1px solid rgba(0,0,0,.04)"></div>
+      <div class="sw-body"><div class="sw-name" style="color:#1A2030">Frost</div><div class="sw-hex" style="color:#3A7CA5">#EDF0F5</div><div class="sw-var">--surf2</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd3" onclick="copyColor('#E2E6EC','Shore')">
+      <div class="sw-color" style="background:#E2E6EC;height:clamp(60px,8vw,90px);border:1px solid rgba(0,0,0,.04)"></div>
+      <div class="sw-body"><div class="sw-name" style="color:#1A2030">Shore</div><div class="sw-hex" style="color:#3A7CA5">#E2E6EC</div><div class="sw-var">--brd</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd4" onclick="copyColor('#D0D6DE','Pebble')">
+      <div class="sw-color" style="background:#D0D6DE;height:clamp(60px,8vw,90px);border:1px solid rgba(0,0,0,.04)"></div>
+      <div class="sw-body"><div class="sw-name" style="color:#1A2030">Pebble</div><div class="sw-hex" style="color:#3A7CA5">#D0D6DE</div><div class="sw-var">--brd-strong</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 03 FOUNDATION ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">03 · FOUNDATION</div>
+  <div class="sh-title">Dark Scale</div>
+</div>
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="sw-grid-6">
+    <div class="sw reveal" onclick="copyColor('#040508','Abyss')">
+      <div class="sw-color" style="background:#040508"></div>
+      <div class="sw-body"><div class="sw-name">Abyss</div><div class="sw-hex">#040508</div><div class="sw-var">--f-abyss</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd1" onclick="copyColor('#070912','Deep Atlantic')">
+      <div class="sw-color" style="background:#070912"></div>
+      <div class="sw-body"><div class="sw-name">Deep Atlantic</div><div class="sw-hex">#070912</div><div class="sw-var">--base</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd2" onclick="copyColor('#0F131E','Harbor')">
+      <div class="sw-color" style="background:#0F131E"></div>
+      <div class="sw-body"><div class="sw-name">Harbor</div><div class="sw-hex">#0F131E</div><div class="sw-var">--surf</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd3" onclick="copyColor('#1A2133','Depth')">
+      <div class="sw-color" style="background:#1A2133"></div>
+      <div class="sw-body"><div class="sw-name">Depth</div><div class="sw-hex">#1A2133</div><div class="sw-var">--f-depth</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd4" onclick="copyColor('#232D42','Current')">
+      <div class="sw-color" style="background:#232D42"></div>
+      <div class="sw-body"><div class="sw-name">Current</div><div class="sw-hex">#232D42</div><div class="sw-var">--f-current</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd5" onclick="copyColor('#2D3A52','Tide')">
+      <div class="sw-color" style="background:#2D3A52"></div>
+      <div class="sw-body"><div class="sw-name">Tide</div><div class="sw-hex">#2D3A52</div><div class="sw-var">--f-tide</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 02 ATLANTIC SCALE ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">04 · ATLANTIC SCALE</div>
+  <div class="sh-title">Blue Spectrum</div>
+</div>
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="sw-grid-10">
+    <div class="sw reveal" onclick="copyColor('#EDF6FB','Atlantic 50')">
+      <div class="sw-color" style="background:#EDF6FB"></div>
+      <div class="sw-body"><div class="sw-name">Foam</div><div class="sw-hex">#EDF6FB</div><div class="sw-var">--a50</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd1" onclick="copyColor('#C8E2F4','Atlantic 100')">
+      <div class="sw-color" style="background:#C8E2F4"></div>
+      <div class="sw-body"><div class="sw-name">Mist</div><div class="sw-hex">#C8E2F4</div><div class="sw-var">--a100</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd2" onclick="copyColor('#9EC8E8','Atlantic 200')">
+      <div class="sw-color" style="background:#9EC8E8"></div>
+      <div class="sw-body"><div class="sw-name">Spray</div><div class="sw-hex">#9EC8E8</div><div class="sw-var">--a200</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd3" onclick="copyColor('#74B6DC','Atlantic 300')">
+      <div class="sw-color" style="background:#74B6DC"></div>
+      <div class="sw-body"><div class="sw-name">Horizon</div><div class="sw-hex">#74B6DC</div><div class="sw-var">--a300</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd4" onclick="copyColor('#4A9FD1','Atlantic 400')">
+      <div class="sw-color" style="background:#4A9FD1"></div>
+      <div class="sw-body"><div class="sw-name">Surface W.</div><div class="sw-hex">#4A9FD1</div><div class="sw-var">--a400</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd5" onclick="copyColor('#3A7CA5','Atlantic 500')">
+      <div class="sw-color" style="background:#3A7CA5"><div class="sw-core-tag">CORE</div></div>
+      <div class="sw-body sw-body-acc"><div class="sw-name" style="opacity:.8">Atlantic</div><div class="sw-hex" style="opacity:.9">#3A7CA5</div><div class="sw-var">--acc / --a500</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd6" onclick="copyColor('#2E6389','Atlantic 600')">
+      <div class="sw-color" style="background:#2E6389"></div>
+      <div class="sw-body"><div class="sw-name">Deep</div><div class="sw-hex">#2E6389</div><div class="sw-var">--a600</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd7" onclick="copyColor('#224B6E','Atlantic 700')">
+      <div class="sw-color" style="background:#224B6E"></div>
+      <div class="sw-body"><div class="sw-name">Trench</div><div class="sw-hex">#224B6E</div><div class="sw-var">--a700</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd8" onclick="copyColor('#163452','Atlantic 800')">
+      <div class="sw-color" style="background:#163452"></div>
+      <div class="sw-body"><div class="sw-name">Abyss B.</div><div class="sw-hex">#163452</div><div class="sw-var">--a800</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd9" onclick="copyColor('#0B1E37','Atlantic 900')">
+      <div class="sw-color" style="background:#0B1E37"></div>
+      <div class="sw-body"><div class="sw-name">Void</div><div class="sw-hex">#0B1E37</div><div class="sw-var">--a900</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 03 TEXT SCALE ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">05 · TEXT & NEUTRAL</div>
+  <div class="sh-title">Type Tone Scale</div>
+</div>
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="sw-grid-5">
+    <div class="sw reveal" onclick="copyColor('#E8ECF2','Silver')">
+      <div class="sw-color" style="background:#070912;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,36px);color:#E8ECF2;line-height:1">Aa</span>
+      </div>
+      <div class="sw-body"><div class="sw-name">Silver</div><div class="sw-hex">#E8ECF2</div><div class="sw-var">--tx / --n100</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd1" onclick="copyColor('#C4CAD6','Cloud')">
+      <div class="sw-color" style="background:#070912;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,36px);color:#C4CAD6;line-height:1">Aa</span>
+      </div>
+      <div class="sw-body"><div class="sw-name">Cloud</div><div class="sw-hex">#C4CAD6</div><div class="sw-var">--n200</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd2" onclick="copyColor('#9AA4B5','Haze')">
+      <div class="sw-color" style="background:#070912;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,36px);color:#9AA4B5;line-height:1">Aa</span>
+      </div>
+      <div class="sw-body"><div class="sw-name">Haze</div><div class="sw-hex">#9AA4B5</div><div class="sw-var">--n300</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd3" onclick="copyColor('#6E7A8E','Ash')">
+      <div class="sw-color" style="background:#070912;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,36px);color:#6E7A8E;line-height:1">Aa</span>
+      </div>
+      <div class="sw-body"><div class="sw-name">Ash</div><div class="sw-hex">#6E7A8E</div><div class="sw-var">--n400</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+    <div class="sw reveal rd4" onclick="copyColor('#485668','Slate')">
+      <div class="sw-color" style="background:#070912;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,36px);color:#485668;line-height:1">Aa</span>
+      </div>
+      <div class="sw-body"><div class="sw-name">Slate</div><div class="sw-hex">#485668</div><div class="sw-var">--n500</div></div>
+      <div class="sw-hint">COPY HEX</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 04 SEMANTIC ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">06 · SEMANTIC COLORS</div>
+  <div class="sh-title">System Signals</div>
+</div>
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="sem-grid">
+    <div class="sem-card reveal" onclick="copyColor('#3A7CA5','Atlantic')">
+      <div class="sem-top" style="background:#3A7CA5"></div>
+      <div class="sem-dot" style="background:#3A7CA5"></div>
+      <div class="sem-nm">Atlantic</div>
+      <div class="sem-role">INFO · PRIMARY</div>
+
+      <div class="sem-hx" style="color:#3A7CA5">#3A7CA5</div>
+    </div>
+    <div class="sem-card reveal rd1" onclick="copyColor('#3A8C6E','Vital')">
+      <div class="sem-top" style="background:#3A8C6E"></div>
+      <div class="sem-dot" style="background:#3A8C6E"></div>
+      <div class="sem-nm">Vital</div>
+      <div class="sem-role">SUCCESS · APPROVED</div>
+
+      <div class="sem-hx" style="color:#3A8C6E">#3A8C6E</div>
+    </div>
+    <div class="sem-card reveal rd2" onclick="copyColor('#A07840','Caution')">
+      <div class="sem-top" style="background:#A07840"></div>
+      <div class="sem-dot" style="background:#A07840"></div>
+      <div class="sem-nm">Caution</div>
+      <div class="sem-role">WARNING · PENDING</div>
+
+      <div class="sem-hx" style="color:#A07840">#A07840</div>
+    </div>
+    <div class="sem-card reveal rd3" onclick="copyColor('#8C3A3A','Critical')">
+      <div class="sem-top" style="background:#8C3A3A"></div>
+      <div class="sem-dot" style="background:#8C3A3A"></div>
+      <div class="sem-nm">Critical</div>
+      <div class="sem-role">ERROR · BLOCKED</div>
+
+      <div class="sem-hx" style="color:#8C3A3A">#8C3A3A</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 05 DATA PALETTE ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">07 · DATA PALETTE</div>
+  <div class="sh-title">Visualization Colors</div>
+</div>
+<div class="pad" style="padding-bottom:4px">
+  <div class="ds-grid">
+    <div class="ds reveal" onclick="copyColor('#3A7CA5','Atlantic')">
+      <div class="ds-bar" style="background:#3A7CA5"><div class="ds-glow" style="background:#3A7CA5"></div></div>
+      <div class="ds-body"><div class="ds-idx">D1</div><div class="ds-nm">Atlantic</div><div class="ds-hx" style="color:#3A7CA5">#3A7CA5</div><div class="ds-ux">Primary metric</div></div>
+    </div>
+    <div class="ds reveal rd1" onclick="copyColor('#4DA8A0','Teal')">
+      <div class="ds-bar" style="background:#4DA8A0"><div class="ds-glow" style="background:#4DA8A0"></div></div>
+      <div class="ds-body"><div class="ds-idx">D2</div><div class="ds-nm">Teal</div><div class="ds-hx" style="color:#4DA8A0">#4DA8A0</div><div class="ds-ux">Secondary metric</div></div>
+    </div>
+    <div class="ds reveal rd2" onclick="copyColor('#7082CC','Sky')">
+      <div class="ds-bar" style="background:#7082CC"><div class="ds-glow" style="background:#7082CC"></div></div>
+      <div class="ds-body"><div class="ds-idx">D3</div><div class="ds-nm">Sky</div><div class="ds-hx" style="color:#7082CC">#7082CC</div><div class="ds-ux">Regulatory data</div></div>
+    </div>
+    <div class="ds reveal rd3" onclick="copyColor('#9266B0','Dusk')">
+      <div class="ds-bar" style="background:#9266B0"><div class="ds-glow" style="background:#9266B0"></div></div>
+      <div class="ds-body"><div class="ds-idx">D4</div><div class="ds-nm">Dusk</div><div class="ds-hx" style="color:#9266B0">#9266B0</div><div class="ds-ux">Portfolio segments</div></div>
+    </div>
+    <div class="ds reveal rd4" onclick="copyColor('#B06666','Coral')">
+      <div class="ds-bar" style="background:#B06666"><div class="ds-glow" style="background:#B06666"></div></div>
+      <div class="ds-body"><div class="ds-idx">D5</div><div class="ds-nm">Coral</div><div class="ds-hx" style="color:#B06666">#B06666</div><div class="ds-ux">Risk indicators</div></div>
+    </div>
+    <div class="ds reveal rd5" onclick="copyColor('#5A9C7A','Bio')">
+      <div class="ds-bar" style="background:#5A9C7A"><div class="ds-glow" style="background:#5A9C7A"></div></div>
+      <div class="ds-body"><div class="ds-idx">D6</div><div class="ds-nm">Bio</div><div class="ds-hx" style="color:#5A9C7A">#5A9C7A</div><div class="ds-ux">Clinical signals</div></div>
+    </div>
+    <div class="ds reveal rd6" onclick="copyColor('#A88C4A','Gold')">
+      <div class="ds-bar" style="background:#A88C4A"><div class="ds-glow" style="background:#A88C4A"></div></div>
+      <div class="ds-body"><div class="ds-idx">D7</div><div class="ds-nm">Gold</div><div class="ds-hx" style="color:#A88C4A">#A88C4A</div><div class="ds-ux">Commercial value</div></div>
+    </div>
+    <div class="ds reveal rd7" onclick="copyColor('#9E7080','Rose')">
+      <div class="ds-bar" style="background:#9E7080"><div class="ds-glow" style="background:#9E7080"></div></div>
+      <div class="ds-body"><div class="ds-idx">D8</div><div class="ds-nm">Rose</div><div class="ds-hx" style="color:#9E7080">#9E7080</div><div class="ds-ux">Team / timeline</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Data demo multi-series chart -->
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="dd-wrap reveal">
+    <div class="dd-topbar">
+      <div class="dd-lbl">ALL 8 SERIES · LIVE PREVIEW</div>
+      <div class="dd-legend">
+        <div class="dd-li"><div class="dd-li-line" style="background:#3A7CA5"></div><div class="dd-li-txt">Atlantic</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#4DA8A0"></div><div class="dd-li-txt">Teal</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#7082CC"></div><div class="dd-li-txt">Sky</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#9266B0"></div><div class="dd-li-txt">Dusk</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#B06666"></div><div class="dd-li-txt">Coral</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#5A9C7A"></div><div class="dd-li-txt">Bio</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#A88C4A"></div><div class="dd-li-txt">Gold</div></div>
+        <div class="dd-li"><div class="dd-li-line" style="background:#9E7080"></div><div class="dd-li-txt">Rose</div></div>
+      </div>
+    </div>
+    <svg viewBox="0 0 800 240" style="width:100%;height:auto;display:block;position:relative;z-index:2" preserveAspectRatio="xMidYMid meet">
+      <line x1="40" y1="20" x2="785" y2="20" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+      <line x1="40" y1="70" x2="785" y2="70" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+      <line x1="40" y1="120" x2="785" y2="120" stroke="#3A7CA5" stroke-width=".5" opacity=".05"/>
+      <line x1="40" y1="170" x2="785" y2="170" stroke="#3A7CA5" stroke-width=".5" opacity=".04"/>
+      <line x1="40" y1="220" x2="785" y2="220" stroke="#3A7CA5" stroke-width=".5" opacity=".07"/>
+      <line x1="40" y1="18" x2="40" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".06"/>
+      <text x="32" y="24" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="end" font-family="Outfit">100</text>
+      <text x="32" y="74" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="end" font-family="Outfit">75</text>
+      <text x="32" y="124" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="end" font-family="Outfit">50</text>
+      <text x="32" y="174" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="end" font-family="Outfit">25</text>
+      <text x="60"  y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q1 '24</text>
+      <text x="180" y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q2 '24</text>
+      <text x="300" y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q3 '24</text>
+      <text x="420" y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q4 '24</text>
+      <text x="540" y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q1 '25</text>
+      <text x="660" y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q2 '25</text>
+      <text x="780" y="234" fill="#3A7CA5" opacity=".12" font-size="8" text-anchor="middle" font-family="Outfit">Q3 '25</text>
+      <line x1="60"  y1="216" x2="60"  y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <line x1="180" y1="216" x2="180" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <line x1="300" y1="216" x2="300" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <line x1="420" y1="216" x2="420" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <line x1="540" y1="216" x2="540" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <line x1="660" y1="216" x2="660" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <line x1="780" y1="216" x2="780" y2="222" stroke="#3A7CA5" stroke-width=".5" opacity=".1"/>
+      <polyline points="60,180 180,160 300,150 420,130 540,110 660,90 780,80" stroke="#5A9C7A" stroke-width="1.5" fill="none" opacity=".4"/>
+      <polyline points="60,140 180,150 300,130 420,140 540,120 660,110 780,90" stroke="#A88C4A" stroke-width="1.5" fill="none" opacity=".4"/>
+      <polyline points="60,130 180,120 300,130 420,110 540,120 660,90 780,100" stroke="#9266B0" stroke-width="1.5" fill="none" opacity=".45"/>
+      <polyline points="60,100 180,110 300,90 420,100 540,80 660,90 780,70" stroke="#B06666" stroke-width="1.5" fill="none" opacity=".45"/>
+      <polyline points="60,170 180,150 300,140 420,120 540,100 660,80 780,70" stroke="#7082CC" stroke-width="1.5" fill="none" opacity=".5"/>
+      <polyline points="60,110 180,100 300,80 420,70 540,50 660,56 780,40" stroke="#4DA8A0" stroke-width="1.5" fill="none" opacity=".6"/>
+      <polyline points="60,160 180,130 300,110 420,80 540,90 660,60 780,44" stroke="#3A7CA5" stroke-width="2.5" fill="none" opacity=".85"/>
+      <!-- D8 Rose -->
+      <polyline points="60,155 180,145 300,155 420,145 540,135 660,125 780,115" stroke="#9E7080" stroke-width="1.5" fill="none" opacity=".4"/>
+    </svg>
+  </div>
+</div>
+
+<div class="dv pad"></div>
+
+<!-- ══ 06 OPACITY REFERENCE ══ -->
+<div class="sh pad reveal">
+  <div class="sh-num">08 · OPACITY REFERENCE</div>
+  <div class="sh-title">Atlantic Opacity Scale</div>
+</div>
+<div class="pad" style="padding-bottom:clamp(32px,5vw,56px)">
+  <div class="op-grid reveal">
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.1);border:1px solid rgba(58,124,165,.25)"></div>
+      <div class="op-pct">10%</div>
+      <div class="op-rgba">rgba(58,124,165,.10)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.2);border:1px solid rgba(58,124,165,.3)"></div>
+      <div class="op-pct">20%</div>
+      <div class="op-rgba">rgba(58,124,165,.20)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.3);border:1px solid rgba(58,124,165,.35)"></div>
+      <div class="op-pct">30%</div>
+      <div class="op-rgba">rgba(58,124,165,.30)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.4);border:1px solid rgba(58,124,165,.45)"></div>
+      <div class="op-pct">40%</div>
+      <div class="op-rgba">rgba(58,124,165,.40)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.5);border:1px solid rgba(58,124,165,.55)"></div>
+      <div class="op-pct">50%</div>
+      <div class="op-rgba">rgba(58,124,165,.50)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.6);border:1px solid rgba(58,124,165,.65)"></div>
+      <div class="op-pct">60%</div>
+      <div class="op-rgba">rgba(58,124,165,.60)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.7);border:1px solid rgba(58,124,165,.75)"></div>
+      <div class="op-pct">70%</div>
+      <div class="op-rgba">rgba(58,124,165,.70)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.8);border:1px solid rgba(58,124,165,.85)"></div>
+      <div class="op-pct">80%</div>
+      <div class="op-rgba">rgba(58,124,165,.80)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:rgba(58,124,165,.9);border:1px solid rgba(58,124,165,.95)"></div>
+      <div class="op-pct">90%</div>
+      <div class="op-rgba">rgba(58,124,165,.90)</div>
+    </div>
+    <div class="op-cell">
+      <div class="op-ring" style="width:clamp(28px,4vw,44px);height:clamp(28px,4vw,44px);background:#3A7CA5;border:1px solid #3A7CA5"></div>
+      <div class="op-pct">100%</div>
+      <div class="op-rgba">#3A7CA5</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <div class="foot-credit">DESIGNED & DEVELOPED BY</div>
+  <div>
+    <img src="https://fiapex.com/assets/img/logo/logo.svg" alt="Fiapex" style="height:20px;opacity:.15;filter:grayscale(1) brightness(2)" onerror="this.style.display='none'">
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('prog').style.width=(window.scrollY/h*100)+'%';
+});
+
+// Toast
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(window._tTO);
+  window._tTO=setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+// Copy color
+function copyColor(hex,name){
+  navigator.clipboard.writeText(hex).then(()=>{
+    showToast(name+' · '+hex+' COPIED');
+  }).catch(()=>{
+    showToast(hex+' COPIED');
+  });
+}
+</script>
+</body>
+</html>
